@@ -1,0 +1,236 @@
+
+<style>
+/* ─────────── RESET & 공통 ─────────── */
+*{box-sizing:border-box}
+body{margin:0;padding:0;background:#000}
+:root{--main-blue:#0b5cff;--yellow:#ffdc00}
+
+/* ─────────── NAVIGATION ─────────── */
+.top-nav{
+  position:fixed;top:0;left:0;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;border-bottom:1px solid rgba(229,232,236,.25);
+  z-index:1000;transition:background .3s,transform .3s;min-height:75px
+}
+.top-nav.transparent{background:transparent}
+.top-nav.transparent .menu a,
+.top-nav.transparent .logo-text{color:#fff}
+.top-nav.transparent .hamburger span{background:#fff}
+
+.top-nav.solid{background:#fff}
+.top-nav.solid .menu a,
+.top-nav.solid .logo-text{color:#333}
+.top-nav.solid .hamburger span{background:#000}
+
+.top-nav.menu-open{background:#fff}
+.top-nav.menu-open .menu a,
+.top-nav.menu-open .logo-text{color:#000}
+.top-nav.menu-open .hamburger span{background:#000}
+
+.top-nav.hide{transform:translateY(-100%)}
+
+/* 로고 & 메뉴 */
+.logo-group{display:flex;align-items:center;gap:8px}
+.logo-group img{width:100%;max-width:150px;transition:opacity .3s}
+.logo-text{font-size:15px;font-weight:600;transition:color .3s}
+
+.menu{flex:1;display:flex;justify-content:center;gap:84px}
+.menu a{
+  position:relative;text-decoration:none;font-size:17px;color:inherit;
+  padding:4px 8px;transition:background .3s,color .3s
+}
+@media(min-width:1200px){
+  .menu a:hover{color:#000}
+  .menu a::after{
+    content:"";position:absolute;bottom:-4px;left:50%;width:0;height:3px;
+    background:var(--yellow);transition:width .3s ease,left .3s ease
+  }
+  .menu a:hover::after{left:0;width:100%}
+}
+
+/* 전화 버튼 – 두 줄 / 텍스트만 페이드 */
+.right{display:flex;align-items:center;gap:14px}
+.phone-btn{
+  display:inline-block;background:#000;color:#fff;border:none;border-radius:22px;
+  padding:8px 18px;font-size:14px;font-weight:500;cursor:pointer;
+  text-align:center;line-height:1.35;text-decoration:none;white-space:normal
+}
+.phone-btn .txt{
+  display:inline-block;
+  transition:opacity .35s ease, color .35s ease;
+  opacity:1;
+  color:inherit;
+}
+
+/* HDMI: 모바일 패널 내 전화 버튼 호버 라인 제거 */
+.mobile-panel .phone-btn:hover::after {
+  display: none;
+}
+
+/* 햄버거 */
+.hamburger{
+  display:none;width:28px;height:22px;position:relative;
+  background:none;border:none;cursor:pointer
+}
+.hamburger span{
+  position:absolute;left:0;width:100%;height:3px;border-radius:2px;background:#000;
+  transition:all .3s
+}
+.hamburger span:nth-child(1){top:0}
+.hamburger span:nth-child(2){top:9px}
+.hamburger span:nth-child(3){top:18px}
+.hamburger.open span:nth-child(1){top:9px;transform:rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){top:9px;transform:rotate(-45deg)}
+
+/* 모바일 패널 */
+.mobile-panel{
+  display:none;flex-direction:column;gap:18px;
+  position:absolute;top:100%;left:0;width:100%;
+  background:#fff;border-bottom:1px solid #e5e8ec;
+  padding:20px 24px;animation:slideDown .3s
+}
+.mobile-panel a{
+  position:relative;font-size:15px;color:#333;text-decoration:none;
+  padding:4px 0;transition:color .3s
+}
+@media(hover:hover) and (max-width:1199px){
+  .mobile-panel a:hover{color:#000}
+  .mobile-panel a::after{
+    content:"";position:absolute;bottom:0;left:50%;width:0;height:2px;
+    background:var(--yellow);transition:width .3s ease,left .3s ease
+  }
+  .mobile-panel a:hover::after{left:0;width:15%}
+}
+.mobile-contact{display:flex;align-items:center;justify-content:center;margin-top:8px}
+.mobile-contact .phone-btn{width:90%;max-width:240px}
+
+/* 모바일 전용: 전화 텍스트 흰색 고정 */
+@media(max-width:1200px){
+  .phone-btn .txt { color: #fff !important; }
+}
+
+@keyframes slideDown{
+  from{opacity:0;transform:translateY(-12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:1200px){
+  .menu,.right{display:none}
+  .hamburger{display:block}
+  .mobile-panel.show{display:flex}
+}
+</style>
+
+
+<nav id="mainNav" class="top-nav transparent">
+  <div class="logo-group">
+    <a href="./index.html">
+      <img id="logoImg"
+           src="https://glorylawfirm.kr/kor/images/common/logo-light.png"
+           data-src-light="https://glorylawfirm.kr/kor/images/common/logo.png"
+           data-src-dark="https://glorylawfirm.kr/kor/images/common/logo_on.png"
+           alt="법무법인 글로리 로고">
+    </a>
+  </div>
+
+  <div class="menu">
+    <a href="./case1.html">경찰 &amp; 검찰 수사단계</a>
+    <a href="./case2.html">법원단계</a>
+    <a href="./location.html">오시는길</a>
+    <a href="./consulting.html">긴급상담</a>
+  </div>
+
+  <div class="right">
+    <a class="phone-btn" href="#"><span class="txt"></span></a>
+  </div>
+
+  <button id="hamburgerBtn" class="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div id="mobilePanel" class="mobile-panel">
+    <a href="./case1.html">경찰 &amp; 검찰 수사단계</a>
+    <a href="./case2.html">법원단계</a>
+    <a href="./location.html">오시는길</a>
+    <a href="./consulting.html">긴급상담</a>
+    <div class="mobile-contact">
+      <a class="phone-btn" href="#"><span class="txt"></span></a>
+    </div>
+  </div>
+</nav>
+
+<script>
+/* 모바일 메뉴 토글 */
+function toggleMobile(){
+  const panel   = document.getElementById('mobilePanel');
+  const burger  = document.getElementById('hamburgerBtn');
+  const nav     = document.getElementById('mainNav');
+  const logoImg = document.getElementById('logoImg');
+
+  panel.classList.toggle('show');
+  burger.classList.toggle('open');
+  nav.classList.toggle('menu-open', panel.classList.contains('show'));
+
+  if (window.pageYOffset === 0){
+    logoImg.src = panel.classList.contains('show')
+      ? logoImg.dataset.srcDark
+      : logoImg.dataset.srcLight;
+  }
+}
+
+/* 스크롤 효과 */
+const nav      = document.getElementById('mainNav');
+const logoImg  = document.getElementById('logoImg');
+let lastY      = window.pageYOffset;
+
+function onScroll(){
+  const y = window.pageYOffset;
+  if (y === 0){
+    nav.classList.add('transparent');
+    nav.classList.remove('solid');
+    logoImg.src = logoImg.dataset.srcLight;
+  } else {
+    nav.classList.remove('transparent');
+    nav.classList.add('solid');
+    logoImg.src = logoImg.dataset.srcDark;
+    nav.classList.remove('menu-open');
+    document.getElementById('hamburgerBtn').classList.remove('open');
+    document.getElementById('mobilePanel').classList.remove('show');
+  }
+  if (y > lastY && y > 50) nav.classList.add('hide');
+  else nav.classList.remove('hide');
+  lastY = y;
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+/* 전화 버튼 로테이션 */
+const callData = [
+  { lines:["24시간 비밀상담 (형사)", "서울 : 02-6954-0378"],     tel:"0269540378"   },
+  { lines:["24시간 비밀상담 (송무)", "대전 : 042-721-0606"], tel:"0427210606" }
+];
+const swapDelay = 4000;
+const fadeDur   = 350;
+
+const phoneBtns = Array.from(document.querySelectorAll(".phone-btn"));
+const txtSpans  = phoneBtns.map(btn=>btn.querySelector(".txt"));
+let idx = 0;
+
+function setContent(lines,tel){
+  txtSpans.forEach(s=>s.innerHTML=`${lines[0]}<br>${lines[1]}`);
+  phoneBtns.forEach(b=>b.href=`tel:${tel}`);
+}
+
+function swapPhoneMsg(){
+  idx = (idx + 1) % callData.length;     // 먼저 다음 인덱스로
+  txtSpans.forEach(s=>s.style.opacity=0);
+  setTimeout(()=>{
+    const {lines,tel} = callData[idx];
+    setContent(lines,tel);
+    txtSpans.forEach(s=>s.style.opacity=1);
+  }, fadeDur);
+}
+
+setContent(callData[0].lines, callData[0].tel);
+setInterval(swapPhoneMsg, swapDelay);
+</script>

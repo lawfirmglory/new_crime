@@ -1,0 +1,1045 @@
+      /* 1) 섹션 페이드 인 */
+  #glory-criminal-solution{opacity:0;animation:sectionFadeIn .8s ease-out forwards;animation-delay:.2s;
+    padding:120px 20px;background:url("../img/law-pic2.jpg") no-repeat center;color:#fff;text-align:center;background-size: cover;}
+  @keyframes sectionFadeIn{to{opacity:1;}}
+  
+  /* 인트로 */
+  #glory-criminal-solution .intro-text p{margin:8px 0;font-size:22px;line-height:1.6;
+    animation:fadeUp .6s ease-out forwards;opacity:0;}
+  
+  /* 타이틀 */
+  #glory-criminal-solution .main-title{margin:60px 0 80px;}
+  #glory-criminal-solution .main-title h2,
+  #glory-criminal-solution .main-title h3{opacity:0;animation:fadeUp .6s ease-out forwards;}
+  #glory-criminal-solution .main-title h2{font-size:48px;animation-delay:.8s;}
+  #glory-criminal-solution .main-title h3{font-size:32px;font-weight:400;animation-delay:1s;}
+  
+  /* 단계 컨테이너 */
+  #glory-criminal-solution .steps{display:flex;align-items:center;justify-content:center;gap:30px;
+    flex-wrap:wrap;margin-bottom:80px;}
+  
+  /* fadeUp 공통 */
+  @keyframes fadeUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  #glory-criminal-solution .step,
+  #glory-criminal-solution .arrow{opacity:0;animation:fadeUp .6s ease-out forwards;
+    animation-delay:calc(1.2s + var(--i)*0.2s);}  /* 기본 딜레이 */
+  
+  /* 스텝 기본 */
+  #glory-criminal-solution .step{width:220px;display:flex;flex-direction:column;align-items:center;}
+  #glory-criminal-solution .step .circle{width:160px;height:160px;border:4px solid #fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:rgba(255,255,255,.03);}
+  #glory-criminal-solution .step .step-label{padding:10px 16px;border-radius:16px;
+    font-size:18px;font-weight:600;}
+  #glory-criminal-solution .step .step-desc{font-size:18px;line-height:1.5;text-align:center;}
+  
+  /* 화살표 기본 */
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+  #glory-criminal-solution .arrow{font-size:32px;margin:0 12px;
+    animation-name:fadeUp,pulse;
+    animation-duration:.6s,1.2s;
+    animation-timing-function:ease-out,ease-in-out;
+    animation-delay:calc(1.2s + var(--i)*0.2s),calc(1.5s + var(--i)*0.2s);
+    animation-iteration-count:1,infinite;}
+  
+  /* Quote bar */
+  #glory-criminal-solution .quote-bar{display:inline-flex;align-items:center;gap:40px;
+    background:rgba(255,255,255,.1);padding:24px 36px;border-radius:12px;
+    opacity:0;animation:fadeUp .6s ease-out forwards;animation-delay:2s;}
+  #glory-criminal-solution .quote-bar .quote{font-size:20px;}
+  #glory-criminal-solution .quote-bar .quote strong{color:var(--yellow);}
+  #glory-criminal-solution .quote-bar .stat{font-size:26px;font-weight:600;color:var(--yellow);}
+  
+  /* --------- 기존 반응형 --------- */
+  @media (max-width:768px){
+    #glory-criminal-solution{padding:80px 10px;}
+    #glory-criminal-solution .intro-text p{font-size:18px;}
+    #glory-criminal-solution .main-title h2{font-size:36px;}
+    #glory-criminal-solution .main-title h3{font-size:28px;}
+    #glory-criminal-solution .steps{gap:16px;}
+    #glory-criminal-solution .step{width:160px;}
+    #glory-criminal-solution .step .circle{width:120px;height:120px;border-width:3px;margin-bottom:12px;}
+    #glory-criminal-solution .step .step-label{font-size:16px;}
+    #glory-criminal-solution .step .step-desc{font-size:16px;}
+    #glory-criminal-solution .arrow{font-size:28px;margin:0 8px;}
+    #glory-criminal-solution .quote-bar{flex-direction:column;gap:20px;padding:20px 24px;}
+    #glory-criminal-solution .quote-bar .quote{font-size:18px;}
+    #glory-criminal-solution .quote-bar .stat{font-size:22px;}
+  }
+  @media (max-width:767px){
+    #glory-criminal-solution .steps{gap:16px;}
+    #glory-criminal-solution .step{width:140px;}
+    #glory-criminal-solution .step .circle{width:180px;height:180px;border-width:3px;}
+    #glory-criminal-solution .step .step-label{font-size:19px;padding:6px 10px;}
+    #glory-criminal-solution .step .step-desc{font-size:20px;}
+    #glory-criminal-solution .arrow{font-size:28px;margin:0 8px;}
+  }
+  @media (max-width:370px){
+    #glory-criminal-solution .steps{flex-wrap:nowrap;overflow-x:auto;padding:0 10px;}
+    #glory-criminal-solution .steps::-webkit-scrollbar{height:4px;}
+    #glory-criminal-solution .steps::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3);border-radius:2px;}
+    #glory-criminal-solution .step{width:100px;margin-right:0px;}
+    #glory-criminal-solution .step .circle{width:80px;height:80px;border-width:2px;}
+    #glory-criminal-solution .step .step-label{font-size:12px;padding:4px 8px;}
+    #glory-criminal-solution .step .step-desc{font-size:12px;line-height:1.3;}
+    #glory-criminal-solution .arrow{font-size:24px;margin:0 6px;}
+  }
+  
+  /* ───────────────────────────────────────────
+     추가 1) PC(≥971px) 화살표 fadeUp 딜레이 단축
+  ─────────────────────────────────────────── */
+  @media (min-width:971px){
+    #glory-criminal-solution .arrow{
+      animation-delay:calc(0.4s + var(--i)*0.1s),calc(0.7s + var(--i)*0.1s);
+    }
+  }
+  
+  /* ───────────────────────────────────────────
+     추가 2) 모바일(≤970px) 1열 + pulseVert
+  ─────────────────────────────────────────── */
+  @keyframes pulseVert{
+    0%,100%{transform:rotate(90deg) scale(1);}
+    50%    {transform:rotate(90deg) scale(1.2);}
+  }
+  @media (max-width:970px){
+    #glory-criminal-solution .steps{flex-direction:column;align-items:center;flex-wrap:nowrap;gap:32px;}
+    #glory-criminal-solution .step{width:100%;max-width:420px;}
+    #glory-criminal-solution .arrow{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
+      transform: rotate(90deg);
+      font-size: 34px;
+      opacity: 1;
+      animation: pulseVert 1.1s ease-in-out infinite;
+    }
+  }
+  @media (max-width:600px){
+    #glory-criminal-solution .steps{gap:28px;}
+    #glory-criminal-solution .step{max-width:380px;}
+    #glory-criminal-solution .arrow{font-size:32px;animation:pulseVert 1.1s ease-in-out infinite;}
+  }
+  
+  /* ───────────────────────────────────────────
+     ★ 추가 3) 배경 밝기 조절 오버레이 (텍스트 영향 X)
+  ─────────────────────────────────────────── */
+  #glory-criminal-solution{position:relative;--dim:.45;} /* 0(투명)~1(검정) */
+  
+  #glory-criminal-solution::after{
+    content:"";
+    position:absolute;inset:0;z-index:-1;
+    background:#000;
+    opacity:var(--dim);
+    transition:opacity .3s;
+  }
+         /* ───────────────────────────────────────────
+         0.  핵심 아이디어
+         - #late-response 자체엔 **배경·필터 없음**
+         - 대신 .lr-bg 가 실제 이미지 + filter:brightness
+         - 글자·사진은 z-index:1 로 위층 → 밝기 영향 X
+      ─────────────────────────────────────────── */
+      
+      /* 1) 섹션 레이아웃 - 원본 구조 거의 유지 */
+      #late-response{
+        position:relative;                 /* 배경·오버레이 기준 */
+        --lr-bright:.35;                   /* 0(검정)~1(원본) 설정만 바꿔서 밝기 조절 */
+        color:#fff;
+        padding:80px 20px;
+        overflow:hidden;                   /* 모바일에서 BG 넘침 방지 */
+      }
+      /* 1-A) 배경 이미지를 담당하는 전용 레이어 */
+      #late-response .lr-bg{
+        position:absolute;inset:0;z-index:-2;
+        background:url(../img/page-3-2.jpg) center/cover no-repeat;
+        filter:brightness(var(--lr-bright));
+        transition:filter .35s;
+      }
+      
+      /* (선택) 어둡기를 덧입힐 오버레이 */
+      #late-response .lr-overlay{
+        position:absolute;
+        inset:0;
+        z-index:-1;
+        background:#000;
+        opacity:.15;                       /* 필요 없으면 0 으로 */
+      }
+      
+      /* 2) 컨테이너 (=텍스트/숫자/이미지) */
+      #late-response .lr-container{
+        display:flex;align-items:center;justify-content:space-between;
+        max-width:1200px;margin:0 auto;gap:40px;
+        position:relative;z-index:1;       /* 글자가 밝기영향 안 받게 위층 */
+      }
+      
+      /* 3) 텍스트 영역 (원본) */
+      #late-response .lr-text{flex:1;min-width:280px;animation:fadeUp .8s ease-out forwards;opacity:0;}
+      #late-response .lr-title{margin:0 0 54px;font-size:2.5rem;line-height:1.3;font-weight:700;}
+      #late-response .lr-desc{margin-top:24px;line-height:1.6;font-size:1.3rem;opacity:1;}
+     #late-response .lr-desc p{margin:8px 0;font-size:1.3rem;line-height:1.6;opacity:.9;text-align: left !important;}
+      
+      /* 4) 성공사례 숫자 (원본) */
+      #late-response .lr-status{width:200px;text-align:center;border-left:1px solid rgba(255,255,255,.3);
+        padding-left:24px;animation:fadeUp .8s ease-out .4s forwards;opacity:0;}
+      #late-response .lr-status-title{font-size:1rem;margin-bottom:12px;opacity:.8;}
+      #late-response .lr-status-number{font-size:3rem;font-weight:600;color:#e6d3a3;}
+      #late-response .lr-status-number .plus{font-size:1.5rem;vertical-align:super;}
+      
+      /* 5) 이미지 영역 (원본) */
+      #late-response .lr-images{flex:1;display:grid;gap:24px;animation:fadeUp .8s ease-out .6s forwards;opacity:0;}
+      #late-response .lr-img-item{overflow:hidden;border-radius:8px;}
+      #late-response .lr-img-item img{width:100%;max-width:350px;display:block;transform:scale(1);transition:transform .6s ease;}
+      
+      @keyframes fadeUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+      
+      /* 6) 모바일 스택 (원본) */
+      @media(max-width:1250px){
+        #late-response{padding:60px 16px;}
+        #late-response .lr-container{flex-direction:column;align-items:center;}
+        #late-response .lr-text,#late-response .lr-desc,#late-response .lr-title,#late-response .lr-status-title{text-align:center;}
+        #late-response .lr-status{border-left:none;border-top:1px solid rgba(255,255,255,.3);margin:32px 0;padding:24px 0 0;width:auto;padding-left:0;}
+        #late-response .lr-images{grid-template-columns:1fr;gap:16px;}
+        #late-response .lr-status-number{font-size:2.5rem;}
+        #late-response .lr-title{font-size:2rem;}
+        #late-response .lr-desc p{font-size:1.4rem;}
+}
+
+@media(max-width:600px){
+  #late-response .lr-desc p{font-size:1.3rem;}
+}
+
+@media(max-width:500px){
+  #late-response .lr-desc p{font-size:1.1rem;}
+}
+
+@media(max-width:400px){
+  #late-response .lr-desc p{font-size:0.95rem;}
+}
+
+#case-section{
+  background:
+    linear-gradient(rgba(69,60,47,0.7), rgba(69,60,47,0.7)),
+    url("path/to/your-image.jpg") no-repeat center/cover;
+  color:#fff;padding:80px 20px;
+}
+#case-section .lr-container{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;gap:40px;}
+#case-section .lr-text{flex:1;min-width:280px;animation:fadeInUp .8s ease-out forwards;opacity:0;}
+#case-section .lr-title{margin:0 0 54px;font-size:2.5rem;line-height:1.3;font-weight:700;}
+#case-section .lr-desc p{margin:8px 0;font-size:1.3rem;line-height:1.6;opacity:.9;text-align: left !important;}
+#case-section .lr-status{width:200px;text-align:center;border-left:1px solid rgba(255,255,255,.3);padding-left:24px;animation:fadeInUp .8s ease-out .4s forwards;opacity:0;}
+#case-section .lr-status-title{font-size:1rem;margin-bottom:12px;opacity:.8;}
+#case-section .lr-status-number{font-size:3rem;font-weight:600;color:#e6d3a3;}
+#case-section .lr-status-number .num{display:inline-block;}
+#case-section .lr-status-number .unit{font-size:1.5rem;vertical-align:super;margin-left:4px;}
+#case-section .lr-images{flex:1;display:grid;gap:24px;animation:fadeInUp .8s ease-out .6s forwards;opacity:0;}
+#case-section .lr-img-item img{width:100%;max-width:350px;display:block;border-radius:8px;}
+@keyframes fadeInUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@media(max-width:1250px){
+  #case-section{padding:60px 16px;}
+  #case-section .lr-container{flex-direction:column;align-items:center;}
+  #case-section .lr-text,#case-section .lr-title,#case-section .lr-desc p,#case-section .lr-status-title{text-align:center;}
+  #case-section .lr-status{border-left:none;border-top:1px solid rgba(255,255,255,.3);margin:32px 0;padding:24px 0 0;width:auto;padding-left:0;}
+  #case-section .lr-images{grid-template-columns:1fr;gap:16px;}
+  #case-section .lr-status-number{font-size:2.5rem;}
+  #case-section .lr-title{font-size:2rem;}
+  #case-section .lr-desc p{font-size:1.4rem;}
+}
+
+@media(max-width:600px){
+#case-section .lr-desc p{font-size:1.3rem;}
+}
+
+@media(max-width:500px){
+#case-section .lr-desc p{font-size:1.1rem;}
+}
+
+@media(max-width:400px){
+#case-section .lr-desc p{font-size:0.95rem;}
+}
+
+/* ───────────────────────────────────────────
+   ❷ ★추가 블록 : “글자 영향 없이” 배경만 어둡게
+─────────────────────────────────────────── */
+/* 2-A) 섹션 자체 밝기 필터 제거 & 변수 정의 */
+#case-section{
+  position:relative;
+  background:none !important;    /* 원본 BG 제거 (덮어쓸 뿐, 원본 코드 건드리지 X) */
+  --case-bright:.3;              /* 0(검정) ~ 1(원본) : JS·CSS로 조정 */
+}
+
+/* 2-B) 실제 배경 이미지를 넣는 전용 레이어 */
+#case-section::before{
+  content:"";
+  position:absolute;inset:0;z-index:-2;
+  background:url(../img/page-3-1.jpg) center/cover no-repeat;
+  filter:brightness(var(--case-bright));
+  /* transition:filter .35s; */
+}
+
+/* 2-C) 살짝 컬러 overlay(필요 없으면 opacity:0) */
+#case-section::after{
+  content:"";
+  position:absolute;inset:0;z-index:-1;
+   /* background:rgba(0,0,0);  */
+}
+
+/* 2-D) 본문 컨테이너를 맨 위로 */
+#case-section .lr-container{position:relative;z-index:1;}
+
+
+/* ──────────────────────────────────────────
+   (2) 원본 스타일 – 그대로 유지
+───────────────────────────────────────── */
+#final-section{
+  background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    url("path/to/your-final-bg.jpg") no-repeat center/cover;
+  color:#fff;padding:80px 20px;
+}
+#final-section .lr-container{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;gap:40px;}
+#final-section .lr-text{flex:1;min-width:280px;animation:fadeInUp .8s ease-out forwards;opacity:0;}
+#final-section .lr-title{margin:0 0 54px;font-size:2.5rem;line-height:1.3;font-weight:700;}
+#final-section .lr-desc p{margin:8px 0;font-size:1.3rem;line-height:1.6;opacity:.9;text-align: left !important;}
+#final-section .lr-status{width:200px;text-align:center;border-left:1px solid rgba(255,255,255,.3);padding-left:24px;animation:fadeInUp .8s ease-out .4s forwards;opacity:0;}
+#final-section .lr-status-title{font-size:2rem;margin-bottom:12px;opacity:.8;}
+#final-section .lr-status-number{font-size:3rem;font-weight:600;color:#e6d3a3;}
+#final-section .lr-status-number .plus{font-size:1.5rem;vertical-align:super;margin-left:4px;}
+#final-section .lr-images{flex:1;display:grid;gap:24px;animation:fadeInUp .8s ease-out .6s forwards;opacity:0;}
+#final-section .lr-img-item img{width:100%;max-width:350px;display:block;border-radius:8px;}
+@keyframes fadeInUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@media(max-width:1250px){
+  #final-section{padding:60px 16px;}
+  #final-section .lr-container{flex-direction:column;align-items:center;}
+  #final-section .lr-text,#final-section .lr-title,#final-section .lr-desc p,#final-section .lr-status-title{text-align:center;}
+  #final-section .lr-status{border-left:none;border-top:1px solid rgba(255,255,255,.3);margin:32px 0;padding:24px 0 0;width:auto;padding-left:0;}
+  #final-section .lr-images{grid-template-columns:1fr;gap:16px;}
+  #final-section .lr-status-number{font-size:2.5rem;}
+  #final-section .lr-title{font-size:2rem;}
+  #final-section .lr-desc p{font-size:1.4rem;}
+}
+
+@media(max-width:600px){
+  #final-section .lr-desc p{font-size:1.3rem;}
+}
+
+@media(max-width:500px){
+  #final-section .lr-desc p{font-size:1.1rem;}
+}
+
+@media(max-width:400px){
+  #final-section .lr-desc p{font-size:0.95rem;}
+}
+
+/* ──────────────────────────────────────────
+   (3) ★추가 : 배경만 어둡게(글자 영향 X)
+───────────────────────────────────────── */
+/* 3-A) 섹션 전체 밝기 필터 제거 + 변수 선언 */
+#final-section{
+  position:relative;
+  background:none !important;          /* 원본 BG 제거(덮어쓰기) */
+  --final-bright:.35;                  /* 0=검정~1=원본 밝기 */
+}
+/* 3-B) 실제 이미지 + 밝기 필터 */
+#final-section::before{
+  content:"";
+  position:absolute;inset:0;z-index:-2;
+  background:url("../img/page-5.jpg") center/cover no-repeat;
+  filter:brightness(var(--final-bright));
+  transition:filter .35s;
+}
+/* 3-C) 기존 gradient 대체 */
+#final-section::after{
+  content:"";
+  position:absolute;inset:0;z-index:-1;
+  /* background:rgba(0,0,0,0.75); */
+}
+/* 3-D) 본문 컨테이너 위층 */
+#final-section .lr-container{position:relative;z-index:1;};
+
+
+
+
+      /* …─────────(원본 스타일 그대로)───────── */
+  #attorney-profile .ap-wrapper{display:flex !important;max-width:1280px;margin:0 auto;}
+  #attorney-profile .ap-photo{flex:0 0 45%;position:relative;overflow:hidden;display:flex;flex-direction:column;}
+  /* ★ 사진 0.5 s 페이드 전환 */
+  #attorney-profile .ap-photo img.main-photo{
+    width:100%;flex:1 1 auto;object-fit:cover;
+    transition:opacity 1.5s ease !important;
+  }
+  #attorney-profile .ap-caption{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+    font-size:.875rem;color:#fff;background:rgba(0,0,0,.6);padding:4px 14px;border-radius:3px;}
+  
+  #attorney-profile .ap-select{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px;}
+  #attorney-profile .ap-select button{cursor:pointer;padding:8px 0;border:none;border-radius:8px;
+    font-size:.9rem;font-weight:600;background:#424242;color:#ccc;transition:.3s;}
+  #attorney-profile .ap-select button.on,
+  #attorney-profile .ap-select button:hover{background:#fff;color:#222;}
+  
+  #attorney-profile .ap-info{flex:1;position:relative;overflow:hidden;background:rgba(34,34,34,.8);
+    color:#fff;padding:60px 80px;display:flex;flex-direction:column;gap:32px;
+    transition:opacity .5s ease,transform .5s ease;}
+  #attorney-profile .ap-info.switching{opacity:0;transform:translateY(40px);}
+  #attorney-profile .ap-info>*{position:relative;z-index:1;}
+  
+  #attorney-profile .ap-marquee{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);
+    overflow:hidden;pointer-events:none;}
+  #attorney-profile .ap-track{display:inline-block;min-width:200%;animation:ap-slide 25s linear infinite;}
+  #attorney-profile .ap-track span{display:inline-block;font-size:clamp(80px,15vw,220px);font-weight:900;
+    color:rgba(255,255,255,.06);letter-spacing:.05em;}
+  @keyframes ap-slide{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  
+  #attorney-profile .ap-name{margin:0;font-size:2.25rem;font-weight:700;color:#d9d3c9;}
+  #attorney-profile .ap-position{font-size:1.25rem;margin-left:8px;}
+  #attorney-profile .ap-contact{display:flex;gap:16px;flex-wrap:wrap;}
+  #attorney-profile .ap-btn{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;
+    padding:10px 26px;border-radius:42px;font-weight:600;text-decoration:none;}
+  #attorney-profile .ap-btn.phone::before{content:"☎";}
+  #attorney-profile .ap-btn.mail::before{content:"✉";}
+  #attorney-profile .ap-block{display:flex;flex-direction:column;gap:10px;}
+  #attorney-profile .ap-heading{font-size:1.25rem;font-weight:700;margin:0;color:#f2e6d4;}
+  #attorney-profile .ap-list{margin:0;padding-left:1.1em;line-height:1.7;font-size:1rem;}
+  #attorney-profile .ap-list li{list-style:disc;margin:0;}
+  
+  @media(max-width:768px){
+    #attorney-profile .ap-wrapper{flex-direction:column;}
+    #attorney-profile .ap-photo{height:auto;}
+    #attorney-profile .ap-info{padding:40px 24px;}
+    #attorney-profile .ap-name{font-size:1.9rem;}
+    #attorney-profile .ap-position{font-size:1.125rem;}
+    #attorney-profile .ap-select{gap:6px;margin:8px;}
+    #attorney-profile .ap-select button{font-size:.8rem;padding:6px 0;}
+  }
+  
+  /* ──▼▼▼  추가: 고급 전환 효과용 ── */
+  #attorney-profile .ap-photo img.main-photo{
+    /* opacity 전환 외에 transform·filter도 함께 */
+    transition:opacity 1.5s ease, transform 1.5s ease, filter 1.5s ease !important;
+  };
+
+
+   /*──────────────────────────────────────────
+      ANIMATION
+    ──────────────────────────────────────────*/
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /*──────────────────────────────────────────
+      #business-area 전용 스타일
+    ──────────────────────────────────────────*/
+    #business-area {
+      position: relative;
+      /* background:url(../img/page-3-2.jpg) no-repeat center; */
+      background-size: cover;
+      padding: 3rem 0rem 3rem 1rem;
+     
+      overflow: hidden;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #fff;
+    }
+    #business-area .ba-header h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: .5rem;
+    }
+
+    @media screen and (max-width:500px) {
+    
+      #business-area .ba-header h2 {
+        font-size: 1.8rem;
+       
+      }
+
+    }
+    
+
+
+    #business-area .ba-header p {
+      font-size: 1rem;
+      color: #fff;
+      line-height: 1.6;
+    }
+  
+    /* 좌/우 버튼 */
+    #business-area .ba-controls {
+      position: absolute;
+      top: 5rem;
+      right: 1rem;
+      display: flex;
+      gap: .5rem;
+      z-index: 10;
+    }
+    #business-area .ba-controls button {
+      background: transparent;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 2.5rem; height: 2.5rem;
+      font-size: 1.5rem; color: #fff;
+      cursor: pointer;
+      transition: background .3s, color .3s;
+    }
+    #business-area .ba-controls button:hover {
+      background: #eee; color: #222;
+    }
+  
+    /* 슬라이더 */
+    #business-area .ba-slider-wrapper {
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+    #business-area .ba-slider {
+      display: flex;
+      gap: 1rem;
+      transition: transform .5s ease;
+      will-change: transform;
+      cursor: grab;
+    }
+    #business-area .ba-slider.dragging {
+      cursor: grabbing;
+    }
+  
+    /* 카드 */
+    #business-area .ba-card {
+      position: relative;
+      flex: 0 0 calc((100% - 3rem)/4);
+      height: 350px;
+      background: #f5f5f513;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    #business-area .ba-card-bg {
+      position: absolute; inset: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: opacity .5s;
+    }
+    #business-area .ba-card-content {
+      position: relative;
+      padding: 1.5rem;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    #business-area .ba-card h3 {
+      font-size: 1.2rem; margin-bottom: .5rem;
+    }
+    #business-area .ba-card p {
+      font-size: 1rem; color: #666; line-height: 1.4;
+    }
+    #business-area .ba-card-icon {
+      position: absolute; bottom: 1rem; right: 1rem;
+      font-size: 1.5rem; color: #999;
+      transition: color .3s;
+    }
+    #business-area .ba-card:hover .ba-card-icon {
+      color: #222;
+    }
+    #business-area .ba-card-extra {
+      display: none;
+    }
+  
+    /* 프로그레스 바 */
+    #business-area .ba-progress {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      height: 4px;
+      background: rgba(0,0,0,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    #business-area .ba-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: rgba(220, 196, 78, 0.8);
+      transition: width .3s ease;
+    }
+  
+    @media (max-width: 1024px) {
+      #business-area .ba-card {
+        flex: 0 0 calc((100% - 1rem)/2.3);
+      }
+    }
+    @media (max-width: 600px) {
+      #business-area .ba-card {
+        flex: 0 0 calc((100% - 1rem)/1.5);
+      }
+      #business-area .ba-controls {
+        position: static;
+        justify-content: left;
+        margin-top: 1rem;
+      }
+    }
+  
+    /* MODAL */
+    #business-area .ba-modal {
+      position: fixed; inset: 0;
+      display: none;
+      align-items: center; justify-content: center;
+  
+    }
+    #business-area .ba-modal[aria-hidden="false"] {
+      display: flex;
+    }
+    #business-area .ba-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.6);
+    }
+    #business-area .ba-modal-content {
+      position: relative;
+      background: #fff;
+      color:#000;
+      padding: 2rem;
+      width: 90%; max-width: 800px;
+      max-height: 80vh;
+      border-radius: 8px;
+      text-align: left;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      overflow-y: auto;
+    }
+    /* hide scrollbar */
+    #business-area .ba-modal-content::-webkit-scrollbar {
+      width: 0;
+      background: transparent;
+    }
+    #business-area .ba-modal-content {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  
+    }
+    #business-area .ba-modal-content.animate {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+    #business-area .ba-modal-close {
+      position: absolute; top: .5rem; right: 1rem;
+      background: transparent; border: none;
+      font-size: 1.5rem; cursor: pointer;
+      color:#000;
+    }
+    #business-area .ba-modal-close:hover {
+      color:#d1ae55;
+    }
+
+    #business-area .ba-modal-title {
+      font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    #business-area .ba-modal-desc {
+      color: #555; line-height: 1.6; margin-bottom: 1rem;
+    }
+    #business-area .ba-modal-extra {line-height:160%}
+  
+    .modal-open   #business-area,
+  .modal-open   #business-area-2{ overflow:visible; }
+  
+  .ba-modal{ z-index:10000 !important; }
+  .modal-open   #business-area{overflow:visible; };
+
+
+    /*──────────────────────────────────────────
+      ANIMATION
+    ──────────────────────────────────────────*/
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /*──────────────────────────────────────────
+      #business-area-2 전용 스타일
+    ──────────────────────────────────────────*/
+    #business-area-2 {
+      position: relative;
+      /* background:url(../img/page-5.jpg) no-repeat center; */
+      background-size: cover;
+      padding: 3rem 0rem 3rem 1rem;
+     
+      overflow: hidden;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #fff;
+    }
+    #business-area-2 .ba-header h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: .5rem;
+    }
+    #business-area-2 .ba-header p {
+      font-size: 1rem;
+      color: #fff;
+      line-height: 1.6;
+    }
+  
+    /* 좌/우 버튼 */
+    #business-area-2 .ba-controls {
+      position: absolute;
+      top: 5rem;
+      right: 1rem;
+      display: flex;
+      gap: .5rem;
+      z-index: 10;
+    }
+    #business-area-2 .ba-controls button {
+      background: transparent;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 2.5rem; height: 2.5rem;
+      font-size: 1.5rem; color: #fff;
+      cursor: pointer;
+      transition: background .3s, color .3s;
+    }
+    #business-area-2 .ba-controls button:hover {
+      background: #eee; color: #222;
+    }
+  
+    /* 슬라이더 */
+    #business-area-2 .ba-slider-wrapper {
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+    #business-area-2 .ba-slider {
+      display: flex;
+      gap: 1rem;
+      transition: transform .5s ease;
+      will-change: transform;
+      cursor: grab;
+    }
+    #business-area-2 .ba-slider.dragging {
+      cursor: grabbing;
+    }
+  
+    /* 카드 */
+    #business-area-2 .ba-card {
+      position: relative;
+      flex: 0 0 calc((100% - 3rem)/4);
+      height: 350px;
+      background: #f5f5f511;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    #business-area-2 .ba-card-bg {
+      position: absolute; inset: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: opacity .5s;
+    }
+    #business-area-2 .ba-card-content {
+      position: relative;
+      padding: 1.5rem;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    #business-area-2 .ba-card h3 {
+      font-size: 1.2rem; margin-bottom: .5rem;
+    }
+    #business-area-2 .ba-card p {
+      font-size: 1rem; color: #666; line-height: 1.4;
+    }
+    #business-area-2 .ba-card-icon {
+      position: absolute; bottom: 1rem; right: 1rem;
+      font-size: 1.5rem; color: #999;
+      transition: color .3s;
+    }
+    #business-area-2 .ba-card:hover .ba-card-icon {
+      color: #222;
+    }
+    #business-area-2 .ba-card-extra {
+      display: none;
+    }
+  
+    /* 프로그레스 바 */
+    #business-area-2 .ba-progress {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      height: 4px;
+      background: rgba(0,0,0,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    #business-area-2 .ba-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: rgba(220, 196, 78, 0.8);
+      transition: width .3s ease;
+    }
+  
+    @media (max-width: 1024px) {
+      #business-area-2 .ba-card {
+        flex: 0 0 calc((100% - 1rem)/2.3);
+      }
+    }
+    @media (max-width: 600px) {
+      #business-area-2 .ba-card {
+        flex: 0 0 calc((100% - 1rem)/1.5);
+      }
+      #business-area-2 .ba-controls {
+        position: static;
+        justify-content: left;
+        margin-top: 1rem;
+      }
+    }
+  
+    /* MODAL */
+    #business-area-2 .ba-modal {
+      position: fixed; inset: 0;
+      display: none;
+      align-items: center; justify-content: center;
+    
+    }
+    #business-area-2 .ba-modal[aria-hidden="false"] {
+      display: flex;
+    }
+    #business-area-2 .ba-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.6);
+    }
+    #business-area-2 .ba-modal-content {
+      position: relative;
+      background: #fff;
+      color:#000;
+      padding: 2rem;
+      width: 90%; max-width: 800px;
+      max-height: 80vh;
+      border-radius: 8px;
+      text-align: left;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      overflow-y: auto;
+      z-index:100;
+    }
+    /* hide scrollbar */
+    #business-area-2 .ba-modal-content::-webkit-scrollbar {
+      width: 0;
+      background: transparent;
+    }
+    #business-area-2 .ba-modal-content {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+     
+    }
+    #business-area-2 .ba-modal-content.animate {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+    #business-area-2 .ba-modal-close {
+      position: absolute; top: .5rem; right: 1rem;
+      background: transparent; border: none;
+      font-size: 1.5rem; cursor: pointer;
+      color:#000;
+    }
+
+    #business-area-2 .ba-modal-close:hover {
+      color:#d1ae55;
+    }
+
+    #business-area-2 .ba-modal-title {
+      font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    #business-area-2 .ba-modal-desc {
+      color: #555; line-height: 1.6; margin-bottom: 1rem;
+    }
+    #business-area-2 .ba-modal-extra { line-height:160%;}
+  
+    #business-area,
+  #business-area-2{
+    position:relative;       /* (혹시 몰라 한 번 더 확실히) */
+  
+  }
+  
+  /* 2) ::before 가상요소 = ‘검은 반투명 필름’              */
+  #business-area::before,
+  #business-area-2::before{
+    content:"";
+    position:absolute;
+    inset:0;                 /* 전체 덮어쓰기 */
+    background:rgba(0,0,0,.4);  /* 어둡기 조절 : 0.55 = 55% 검정 */
+    pointer-events:none;     /* 클릭 막지 않기 */
+    z-index:-1;              /* 본문 바로 아래 계층 */
+    /* 원본 배경이미지가 이미 부모에 걸려 있으므로
+       따로 filter · mix-blend-mode 없이 이것만으로 ‘밝기↓’ 효과 */
+  }
+  
+  /* (1) 카드 확대·그림자·모서리·화살표 효과 – 이전에 만든 것 그대로 유지 */
+  #business-area .ba-card,
+  #business-area-2 .ba-card{
+    transition:
+      transform     .45s cubic-bezier(.25,.8,.25,1),
+      box-shadow    .45s ease,
+      border-radius .45s ease;
+  }
+  #business-area .ba-card:hover,
+  #business-area-2 .ba-card:hover{
+    transform:scale(1.05);
+    box-shadow:0 12px 32px rgba(0,0,0,.45);
+    border-radius:30px 8px 30px 8px;          /* TL·BR 30px */
+  }
+  
+  /* 화살표 움직임 */
+  @keyframes arrowBounce{0%{transform:translateX(0)}50%{transform:translateX(6px)}100%{transform:translateX(0)}}
+  #business-area  .ba-card:hover .ba-card-icon,
+  #business-area-2 .ba-card:hover .ba-card-icon{
+    animation:arrowBounce .8s infinite ease-in-out;
+    color:#fff; opacity:.9;
+  }
+  
+  /* ─── (2) Hover Overlay : 어둡게 & 텍스트 ─── */
+  
+  /* 공통 : 어두워지는 필름 */
+  #business-area  .ba-card::before,
+  #business-area-2 .ba-card::before{
+    content:"";
+    position:absolute; inset:0;
+    background:rgba(0,0,0,0);          /* 평상시 투명 */
+    transition:background .4s ease;
+    z-index:1;                          /* 텍스트 아래·이미지 위 */
+    pointer-events:none;
+  }
+  
+  /* 공통 : “사례 알아보기” 텍스트 */
+  #business-area  .ba-card::after,
+  #business-area-2 .ba-card::after{
+    content:"성공 사례 보기";
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.15rem; font-weight:600; letter-spacing:.04em;
+    color:#fff; text-shadow:0 2px 6px rgba(0,0,0,.4);
+    opacity:0; transform:translateY(10px);
+    transition:opacity .45s ease, transform .45s ease;
+    z-index:2;                          /* 최상단 (화살표보다 위) */
+    pointer-events:none;
+  }
+  
+  /* Hover 상태 – 필름 짙어지고 텍스트 슬라이드-in */
+  #business-area  .ba-card:hover::before,
+  #business-area-2 .ba-card:hover::before{
+    background:rgba(0,0,0,.45);         /* 원하는 어둡기 : 0.45 */
+  }
+  #business-area  .ba-card:hover::after,
+  #business-area-2 .ba-card:hover::after{
+    opacity:1; transform:translateY(0);
+  }
+  
+  #business-area  .ba-card-icon,
+  #business-area-2 .ba-card-icon{
+    position:absolute;                    /* 이미 있으나 안전-재선언 */
+    bottom:1rem; right:1rem;
+    font-size:1.5rem;
+    z-index:3;                            /* ← 오버레이(::before z-1, ::after z-2)보다 위 */
+    transition:color .3s, filter .3s;
+  }
+  
+  /* ② Hover 시 더 선명하게 – 흰색 + 약한 글로우 -------------------- */
+  #business-area  .ba-card:hover .ba-card-icon,
+  #business-area-2 .ba-card:hover .ba-card-icon{
+    color:#fff;                           /* 확실한 흰색 */
+    filter:drop-shadow(0 0 4px rgba(0,0,0,.65));
+    animation:arrowBounce .8s infinite ease-in-out;
+  }
+  
+  /* 공통 모달(팝업) */
+  .ba-modal{
+    position:fixed; inset:0;
+    display:none;                     /* 열릴 때 JS로 변경 */
+    align-items:center; justify-content:center;
+    z-index:10000;                    /* 어떤 레이어보다도 높게 */
+  }
+  .ba-backdrop{                       /* 배경 어둡게 */
+    position:absolute; inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:-1;                       /* 모달내용 바로 아래(필요시 9999도 OK) */
+  }
+  
+  /* body 가 modal-open 일 때 화면 고정 */
+  body.modal-open{
+    overflow:hidden;          /* 스크롤바 제거 */
+    position:fixed;           /* 현재 위치에서 고정 */
+    left:0; right:0;          /* iOS 사파리 흔들림 방지 */
+  }
+  
+  .ba-modal{ z-index:10000 !important; } ;
+
+  /* ────── RESET & 공통 ────── */
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Noto Sans KR',sans-serif;}
+  body{background:#0e0e0e;color:#fff;}
+  
+  /* ────── 후기 영역 ────── */
+  #lawfirm-testimonials{padding:60px 5vw;overflow:hidden;}
+  #lawfirm-testimonials h2{
+    font-size:32px;font-weight:700;text-align:center;margin:80px 0;letter-spacing:-0.01em;}
+  /* 슬라이드 래퍼 (row단위) ─ JS가 translateX 적용 */
+  .marquee-row{
+    display:flex;gap:24px;
+    will-change:transform;
+  }
+  .testimonial-card{
+  border:1px solid #ffffff40;
+    flex:0 0 300px;
+    background:#181611;
+    border-radius:16px;
+    padding:32px 28px 24px 28px;
+    line-height:1.55;
+    box-shadow:0 6px 28px rgba(0,0,0,.44);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    height:220px;
+    min-width:0;
+    position:relative;
+    transition:box-shadow .3s;
+  }
+  .testimonial-card:hover{box-shadow:0 12px 44px 0 rgba(255,228,106,0.11),0 2px 20px 0 rgba(220,220,0,0.03);}
+  .testimonial-card q{
+    display:block;
+    font-size:17px;
+    font-weight:500;
+    margin-bottom:10px;
+    color:#fff;
+    letter-spacing:-0.02em;
+  }
+  .testimonial-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:12px;
+    width:100%;
+  }
+  .testimonial-card .author{
+    font-size:15px;
+    color:#ffe46a;
+    font-weight:700;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .testimonial-card .verdict{
+    display:inline-block;
+    font-size:13px;
+    background:#ffe46a;
+    color:#181611;
+    font-weight:900;
+    border-radius:7px;
+    padding:3.5px 13px 3.5px 13px;
+    letter-spacing:0.04em;
+    margin:0;
+    min-width:72px;text-align:center;
+    box-shadow:0 2px 10px 0 rgba(255,228,106,0.16);
+  }
+  
+  @media(max-width:1100px){
+    .testimonial-card{flex:0 0 260px;padding:26px 17px 18px 17px;height:175px;}
+    #lawfirm-testimonials{padding:36px 2vw;}
+  }
+  
+  .row-gap{height:28px;}
