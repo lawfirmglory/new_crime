@@ -49,10 +49,11 @@ $(document).ready(function(){
   }
   
   function hoa3(){ 
-  
+    setTimeout( function(){
     alert("상담 신청이 완료되었습니다.");
     // $(window).scrollTop(0);
     window.location.href = './thanks.html';
+  },500);
         // $(window).scrollTop(0);
         //  window.location.reload();
   }
