@@ -10,20 +10,20 @@
   menuContainer.innerHTML = `
     <nav id="mainNav" class="top-nav transparent">
       <div class="logo-group">
-        <a href="../index.html">
+        <a href="./index.html">
           <img id="logoImg"
-               src="../img/logo-white.png"
-               data-src-light="../img/logo-white.png"
-               data-src-dark="../img/logo_on.png"
+               src="./img/logo-white.png"
+               data-src-light="./img/logo-white.png"
+               data-src-dark="./img/logo_on.png"
                alt="법무법인 글로리 로고">
         </a>
       </div>
     
       <div class="menu">
-        <a href="../case1.html">경찰 &amp; 검찰 수사단계</a>
-        <a href="../case2.html">법원단계</a>
-        <a href="../location.html">오시는길</a>
-        <a href="../consulting.html">긴급상담</a>
+        <a href="./case1.html">경찰 &amp; 검찰 수사단계</a>
+        <a href="./case2.html">법원단계</a>
+        <a href="./location.html">오시는길</a>
+        <a href="./consulting.html">긴급상담</a>
       </div>
     
       <div class="right">
@@ -35,10 +35,10 @@
       </button>
     
       <div id="mobilePanel" class="mobile-panel">
-        <a href="../case1.html">경찰 &amp; 검찰 수사단계</a>
-        <a href="../case2.html">법원단계</a>
-        <a href="../location.html">오시는길</a>
-        <a href="../consulting.html">긴급상담</a>
+        <a href="./case1.html">경찰 &amp; 검찰 수사단계</a>
+        <a href="./case2.html">법원단계</a>
+        <a href="./location.html">오시는길</a>
+        <a href="./consulting.html">긴급상담</a>
         <div class="mobile-contact">
           <a class="phone-btn" href="#"><span class="txt"></span></a>
         </div>
