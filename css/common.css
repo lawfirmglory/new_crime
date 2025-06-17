@@ -458,6 +458,10 @@ animation: wheel-fade 2s ease-in-out infinite;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
   }
   #glory-consult input:focus,
@@ -465,6 +469,10 @@ animation: wheel-fade 2s ease-in-out infinite;
   #glory-consult textarea:focus {
     border-color: #dcbe4e;
     box-shadow: 0 0 0 4px rgba(220,190,78,0.2);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     outline: none;
   }
   #glory-consult textarea {
