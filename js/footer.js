@@ -4,7 +4,7 @@ footer.innerHTML = `
   <!-- 상단: 로고 + 네비 -->
   <div class="footer-top">
     <div class="footer-logo">
-      <img src="https://glorylawfirm-crime.com/intro/img/f_logo.png" alt="법무법인 글로리 이혼가사센터 로고">
+      <img src="./img/f_logo.png" alt="법무법인 글로리 이혼가사센터 로고">
     </div>
    
   </div>
