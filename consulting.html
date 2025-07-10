@@ -17,35 +17,228 @@
     <meta property="og:title" content="법무법인 글로리 - 형사전문센터">
     <meta property="og:description" content="대전에서 형사사건을 전문적으로 다루는 법무법인 글로리 대전형사전문변호사 그룹입니다. 대전변호사, 대전형사전문변호사, 대전형사변호사, 대전성범죄변호사,대전음주운전변호사,대전교통사고변호사,대전사기변호사,대전강제추행변호사,대전학폭변호사를 찾는 의뢰인들께 최적의 대전법률상담을 제공하는 대전 변호사 사무실입니다.">
     <meta property="og:url" content="">
-	<meta property="og:image" content="./intro/img/intro-1.jpg"/>
+	<meta property="og:image" content="./img/intro-1.jpg"/>
+  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="법무법인 글로리 - 형사전문센터">
     <meta name="twitter:site" content="법무법인 글로리 - 형사전문센터">
     <meta name="twitter:description" content="법무법인 글로리 - 형사전문센터">
-	<meta name="twitter:image" content="./intro/img/intro-1.jpg"/>
+	<meta name="twitter:image" content="./img/intro-1.jpg?ver=1"/>
   <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="./css/common.css"/>
-  <!-- <link rel="stylesheet" href="./css/main-style.css"/> -->
+  <link rel="stylesheet" href="./css/main-style.css"/>
+  <style>
+    /* ── RESET & LAYOUT ── */
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Pretendard',sans-serif;background:#111;color:#fff;overflow-x:hidden}
+    .container{display:flex}
+    #main{flex:1;position:relative;overflow:hidden}
+    #visualTransWrap{position:absolute;inset:0;pointer-events:none;z-index:5}
 
-<style>
-  body{background-color: #000;}
-</style>
+    /* ── SWIPER & BG ── */
+    .mv_container{width:100%;height:100vh;position:relative}
+    .swiper-container,.swiper-wrapper,.swiper-slide{width:100%;height:100%}
+    .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 6s ease;filter:brightness(0.5)}
+    .swiper-slide-active .bg{transform:scale(1.12)}
+    .bg1{background-image:url('./img/intro-1.jpg')}
+    .bg2{background-image:url('./img/intro-2.jpg')}
+    .bg3{background-image:url('./img/page-3.jpg')}
 
+    /* ── TEXT & BUTTON ── */
+    .mv_txt_box{position:absolute;top:30%;left:5%;max-width:640px;z-index:2}
+    .mv_cate{font-size:18px;font-weight:600;margin-bottom:14px;color:#ffeb55;display:inline-block}
+    .mv_tit{font-size:46px;line-height:1.4;margin:0 0 12px}
+    @media screen and (max-width:430px) {
+
+      .mv_tit{font-size:26px;}
+    }
+    .mv_txt{font-size:18px;line-height:1.6;font-weight:300}
+    .mv_btn{
+      display:inline-block;margin-top:30px;padding:14px 36px;
+      border:2px solid #fff;border-radius:40px;
+      background:transparent;color:#fff;font-weight:600;letter-spacing:.3px;
+      opacity:0;pointer-events:none;
+      transition:opacity .6s,background .35s,box-shadow .35s,color .35s,transform .35s;
+      position:relative;overflow:hidden;text-decoration:none;
+    }
+    .swiper-slide-active .mv_btn{opacity:1;pointer-events:auto}
+    .mv_btn::after{
+      content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);
+      transform:translateX(-100%);transition:transform .4s;
+    }
+    .mv_btn:hover::after{transform:translateX(0)}
+    .mv_btn:hover{
+      background:#fff;color:#111;box-shadow:0 8px 24px rgba(0,0,0,.25);
+      transform:translateY(-2px);
+    }
+
+    /* ── WAVE ANIMATION ── */
+    .wave_anim .wave{display:inline-block;opacity:0;animation:wave 1.1s ease-out forwards}
+    @keyframes wave{0%{transform:translateY(25px);opacity:0}100%{transform:translateY(0);opacity:1}}
+    .wave_anim.custom .wave:nth-child(1){animation-delay:.15s}
+    .wave_anim.custom .wave:nth-child(2){animation-delay:.3s}
+    .wave_anim.custom .wave:nth-child(3){animation-delay:.45s}
+
+    /* ── PROGRESS BAR ── */
+    .progress-container{position:absolute;bottom:120px;left:5%;right:5%;height:4px;display:flex;gap:10px;z-index:3;width:150px;}
+    .progress-segment{flex:1;background:rgba(255,255,255,.25);border-radius:2px;overflow:hidden;cursor:pointer}
+    .progress-fill{width:0;height:100%;background:#fff;display:block}
+
+    .wheel_down{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:24px;opacity:.7;z-index:3;  animation: wheel-bounce 2s ease-in-out infinite;}
+    /* ── wheel_down 애니메이션 추가 ── */
+
+/* @keyframes wheel-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
+} */
+
+/* 내부 작은 막대(.wheel)에 페이드+슬라이드 애니메이션 */
+.wheel_down .wheel {
+  animation: wheel-fade 2s ease-in-out infinite;
+}
+@keyframes wheel-fade {
+  0%   { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 0.2; transform: translateY(10px); }
+  100% { opacity: 0; transform: translateY(14px); }
+}
+    #sidebar{display:none}
+
+  /* ──────────────────────────────────────────
+        #visual-section 전용 스타일
+     ─────────────────────────────────────────── */
+     #visual-section {
+       position: relative;
+       width: 100%;
+       height: 100vh;
+       overflow: hidden;
+     }
+   
+     /* 비디오 */
+     #visual-section .video_wrap {
+       position: absolute; inset: 0; z-index: 0;
+     }
+     
+     #visual-section .video_wrap video {
+       width: 100%; height: 100%; object-fit: cover; object-position: center;
+     }
+   
+     /* 오버레이 */
+     #visual-section .overlay {
+       position: absolute; inset: 0;
+       background: rgba(0,0,0,0.5);
+     }
+   
+     /* 텍스트 컨테이너 */
+     #visual-section .txt_container {
+       position: absolute; inset: 0; z-index: 2;
+       display: flex; flex-direction: column;
+       justify-content: space-evenly; align-items: center;
+       text-align: center; pointer-events: none;
+     }
+   
+     /* fadeInUp 애니메이션 정의 */
+     @keyframes fadeInUp {
+       from { opacity: 0; transform: translateY(20px); }
+       to   { opacity: 1; transform: translateY(0); }
+     }
+   
+     /* 초기 상태: 숨김 */
+     #visual-section .company,
+     #visual-section .logo,
+     #visual-section .exp {
+       opacity: 0;
+     }
+   
+     /* 스크롤 중앙 진입 시 animate 클래스가 붙으면 실행 */
+     #visual-section.animate .company {
+       color: #fff; font-size: 2.5rem; font-weight: 500;
+       margin-bottom: 0.5em;
+       animation: fadeInUp 1s ease-out forwards;
+       animation-delay: 0.2s;
+     }
+     #visual-section.animate .logo {
+       animation: fadeInUp 1s ease-out forwards;
+       animation-delay: 0.7s;
+     }
+     #visual-section .logo .m_logo {
+       width: 800px; height: 130px;
+       background: url("../img/glory-logo.png") no-repeat center/contain;
+       margin-bottom: 0.5em;
+     }
+     #visual-section.animate .exp {
+       color: #fff; font-size: 1.25rem; line-height: 1.6; max-width: 80%;
+       animation: fadeInUp 1s ease-out forwards;
+       animation-delay: 1s;
+     }
+     #visual-section .highlight {
+       color: #e6d3a3; font-weight: 600;
+     }
+   
+     /* 반응형: 모바일 영상 우측 보이기 포함 */
+     @media (max-width: 768px) {
+       #visual-section .company { font-size: 2rem; }
+       #visual-section .logo .m_logo {
+         background: url("../img/glory-font.png") no-repeat center/contain;
+         width: 400px; height: 300px;
+       }
+       #visual-section .exp { font-size: 1rem; }
+       #visual-section .video_wrap video {
+         object-position: right center;
+       }
+     }
+
+     
+ </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KL7NQY4EY7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KL7NQY4EY7');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WBF3WSKC');</script>
+  <!-- End Google Tag Manager -->
+	
+<!-- Danggeun Market Code -->
+<script src="https://karrot-pixel.business.daangn.com/0.4/karrot-pixel.umd.js"></script>
+<script>
+  window.karrotPixel.init('1734059743133800001');
+  window.karrotPixel.init('1734056897746500001');
+  window.karrotPixel.track('ViewPage');
+</script>
+<!-- End Danggeun Market Code -->
+	
 
         
 </head>
 <body>
+ <!-- Google Tag Manager (noscript) -->
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBF3WSKC"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 
 
 <div id="menu"></div>
- 
+  
+    
 
 
-<section id="glory-consult" style="margin-top:160px;">
+  
+
+
+<section id="glory-consult">
   <div class="gc-deco"></div>
   <div class="gc-header">
-
     <h2>법무법인 글로리<br><span>상담신청</span></h2>
     <p>별도의 상담비용 없이 친절상담으로<br>최적의 법률서비스를 제공합니다.</p>
   </div>
@@ -55,7 +248,7 @@
   </div>
 
   <form id="form_e11" name="frm_phonecall_web" action="" method="post" target="hidden_iframe11" onsubmit="dll(); submitted=true;"  class="gc-form" novalidate>
-    <input type="hidden" name="entry.706813848" value="본문 신청폼">  
+    <input type="hidden" name="entry.706813848" value="긴급상담">  
     <div class="gc-row">
       <label><span>이름<span class="req">*</span></span>
         <input type="text" id="name" name="entry.112176011"  placeholder="성함을 입력해주세요." maxlength="4">
@@ -66,20 +259,20 @@
     </div>
 
     <div class="gc-row">
-      <label><span>상담분야<span class="req">*</span></span>
-        <select  name="entry.1413572286" id="intro_select" >
-          <option selected disabled>상담 분야</option>
-          <option value="성범죄">성범죄</option>
-          <option value="5인 미만 법인">재산범죄</option>
-          <option value="교통범죄">교통범죄</option>
-          <option value="마약범죄">마약범죄</option>
-          <option value="보이스피싱">보이스피싱</option>
-          <option value="피해자">피해자</option>
-        </select>
+      <label>
+        <span>상담분야<span class="req">*</span></span>
+        <div class="custom-select-wrap">
+          <select name="entry.1413572286" id="intro_select" class="custom-select">
+            <option selected disabled>상담 분야</option>
+            <option value="성범죄">성범죄</option>
+            <option value="재산범죄">재산범죄</option>
+            <option value="교통범죄">교통범죄</option>
+            <option value="마약범죄">마약범죄</option>
+            <option value="보이스피싱">보이스피싱</option>
+            <option value="피해자">피해자</option>
+          </select>
+        </div>
       </label>
-      <!-- <label class="gc-inline"><span>희망상담일자</span>
-        <input type="date">
-      </label> -->
     </div>
 
     <div class="gc-row gc-full">
@@ -116,14 +309,15 @@
         <p class="label">주소</p>
         <p id="office-addr">서울특별시 강남구 테헤란로8길 13, 9층 (역삼동, WD빌딩)</p>
         <p class="label">대표번호</p>
-        <p><strong id="office-tel">02-6954-0378</strong></p>
+        <p><strong id="office-tel" >1544-0904</strong></p>
         <p class="label">사무실 번호</p>
-        <p id="office-ext">FAX: 02-6954-0878</p>
+        <b><p id="office-ext">02-6954-0378</p></b>
       </div>
       <div class="go-card go-cta" data-fade>
         <p><strong>365일·24시간</strong><br>언제나 상담 가능합니다</p>
       </div>
     </div>
+
 
     <div class="go-map" data-fade id="map-wrapper">
       <div id="daumRoughmapContainer1747980044541"
@@ -153,8 +347,8 @@
     seoul: {
       name:'서울본사',
       addr:'서울특별시 강남구 테헤란로8길 13, 9층 (역삼동, WD빌딩)',
-      tel:'02-6954-0378',
-      ext:'FAX: 02-6954-0878',
+      tel:'1544-0904',
+      ext:'02-6954-0378',
       html:`<div id="daumRoughmapContainer1747980044541"
                  class="root_daum_roughmap root_daum_roughmap_landing map"
                  style="width:100%;height:260px;"></div>`,
@@ -164,7 +358,7 @@
       name:'대전사무소',
       addr:'대전광역시 서구 둔산중로 78번길 26,<br>민석타워 3층 301호',
       tel:'1544-0904',
-      ext:'042-721-0708 / 042-721-0606',
+      ext:'042-721-0606',
       html:`<div id="daumRoughmapContainer1708000311726"
                  class="root_daum_roughmap root_daum_roughmap_landing map"
                  style="width:100%;height:260px;"></div>`,
@@ -271,6 +465,26 @@
 </script>
 
 
+<script>
+  // 모든 .mv_btn (슬라이드 내 버튼) 대상으로 스크롤 이벤트 적용
+  document.querySelectorAll('.mv_btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+
+        // 스크롤 위치(여백 조정하려면 offset 조절)
+        const offset = target.getBoundingClientRect().top + window.pageYOffset - 40; // 상단 여백 40px
+
+        window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+</script>
+
 <div id="footer_template"></div>
 
 
@@ -304,7 +518,7 @@
         <select name="entry.1413572286" id="pc_select" class="select2">
                                 <option selected disabled>상담 분야</option>
                                 <option value="성범죄">성범죄</option>
-                                <option value="5인 미만 법인">재산범죄</option>
+                                <option value="재산범죄">재산범죄</option>
                                 <option value="교통범죄">교통범죄</option>
                                 <option value="마약범죄">마약범죄</option>
                                 <option value="보이스피싱">보이스피싱</option>
@@ -356,7 +570,7 @@
         <select name="entry.1413572286" id="mob_select" class="select3">
                                         <option selected disabled>상담 분야</option>
                                         <option value="성범죄">성범죄</option>
-                                        <option value="5인 미만 법인">재산범죄</option>
+                                        <option value="재산범죄">재산범죄</option>
                                         <option value="교통범죄">교통범죄</option>
                                         <option value="마약범죄">마약범죄</option>
                                         <option value="보이스피싱">보이스피싱</option>
@@ -373,7 +587,7 @@
     </div>
                 <div class="m_go_btn">
                     <button  id="mob_btn" style="color:#fff;width:100%;font-size:1em;padding: 15px 10px;
-    border-radius: 10px;" disabled>상담신청</button>
+    border-radius: 10px;background:#ac9173" disabled>상담신청</button>
                 </div>
             </form>
             <script type="text/javascript">var submitted = false;</script>
@@ -506,11 +720,11 @@
     function onScroll(){
       const y = window.pageYOffset;
       if (y === 0){
-        nav.classList.add('transparent');
+        /* nav.classList.add('transparent'); */
         nav.classList.remove('solid');
         logoImg.src = logoImg.dataset.srcLight;
       } else {
-        nav.classList.remove('transparent');
+        /* nav.classList.remove('transparent'); */
         nav.classList.add('solid');
         logoImg.src = logoImg.dataset.srcDark;
         nav.classList.remove('menu-open');
@@ -542,7 +756,7 @@
     }
     
     function swapPhoneMsg(){
-      idx = (idx + 1) % callData.length;     // 먼저 다음 인덱스로
+      idx = (idx + 1) % callData.length;     
       txtSpans.forEach(s=>s.style.opacity=0);
       setTimeout(()=>{
         const {lines,tel} = callData[idx];
@@ -553,9 +767,17 @@
     
     setContent(callData[0].lines, callData[0].tel);
     setInterval(swapPhoneMsg, swapDelay);
+
+ 
     </script>
 
-</body>
+<!-- Smartlog -->
+<script type="text/javascript"> 
+  var hpt_info={'_account':'UHPT-26675', '_server': 'a27'};
+</script>
+<script language="javascript" src="//cdn.smlog.co.kr/core/smart.js" charset="utf-8"></script>
+<noscript><img src="//a27.smlog.co.kr/smart_bda.php?_account=26675" style="display:none;width:0;height:0;" border="0"/></noscript>
+
 <script src="./js/jquery-1.8.3.min.js"></script>
 <script src="./js/main.js"></script>
 <script src="./js/menu.js" defer></script>
@@ -566,4 +788,6 @@
 <script src="./js/validation-float-mob.js"></script>
 
 <script src="./js/footer.js" defer></script>
+
+</body>
 </html>
