@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>법무법인 글로리 | 상담신청</title>
+  <meta name="description" content="법무법인 글로리 무료 법률상담 신청">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════ */
+    :root {
+      --navy:       #152C44;
+      --navy-deep:  #0B1929;
+      --gold:       #C4A35A;
+      --gold-light: #D9C78E;
+      --gold-glow:  rgba(196,163,90,0.15);
+      --cream:      #FAF7F2;
+      --card-bg:    #FFFFFF;
+      --text:       #2A2A2A;
+      --text-sub:   #6B6B6B;
+      --text-muted: #A0A0A0;
+      --border:     #E4DFD5;
+      --error:      #B93A3A;
+      --error-bg:   #FFF4F2;
+      --success-bg: #F0F9F4;
+      --success:    #2D7A4F;
+      --radius:     10px;
+      --shadow-sm:  0 2px 8px rgba(0,0,0,0.06);
+      --shadow-lg:  0 20px 60px rgba(11,25,41,0.25);
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background: var(--navy-deep);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════════════
+       BACKGROUND PATTERN
+    ═══════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(196,163,90,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(196,163,90,0.06) 0%, transparent 50%),
+        linear-gradient(170deg, var(--navy-deep) 0%, var(--navy) 50%, #1E3A56 100%);
+      z-index: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       CARD CONTAINER
+    ═══════════════════════════════════════════ */
+    #glory-consult {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      animation: cardEnter 0.6s ease-out;
+    }
+
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Gold top accent */
+    .gc-accent {
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+      background-size: 200% 100%;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 0; }
+      50% { background-position: 200% 0; }
+    }
+
+    /* ═══════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════ */
+    .gc-header {
+      text-align: center;
+      padding: 36px 28px 0;
+    }
+
+    .gc-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3.5px;
+      color: var(--gold);
+      border: 1px solid var(--gold-light);
+      border-radius: 20px;
+      padding: 5px 16px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .gc-header h2 {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.35;
+      letter-spacing: -0.5px;
+    }
+
+    .gc-header h2 span {
+      display: block;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-top: 4px;
+    }
+
+    .gc-header p {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.75;
+      margin-top: 14px;
+    }
+
+    /* ═══════════════════════════════════════════
+       DIVIDER
+    ═══════════════════════════════════════════ */
+    .gc-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 36px;
+    }
+
+    .gc-divider::before, .gc-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    .gc-divider-icon {
+      font-size: 7px;
+      color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════════
+       FORM
+    ═══════════════════════════════════════════ */
+    .gc-form {
+      padding: 0 28px 28px;
+    }
+
+    .gc-field {
+      margin-bottom: 18px;
+    }
+
+    .gc-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      letter-spacing: 0.3px;
+      margin-bottom: 7px;
+    }
+
+    .gc-field label .req {
+      color: var(--error);
+      font-weight: 700;
+      margin-left: 2px;
+    }
+
+    .gc-field input[type="text"],
+    .gc-field input[type="tel"],
+    .gc-field textarea {
+      width: 100%;
+      padding: 13px 15px;
+      font-size: 14px;
+      font-family: 'Pretendard', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .gc-field input:focus,
+    .gc-field textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
+
+    .gc-field input.error,
+    .gc-field textarea.error {
+      border-color: var(--error);
+      background: var(--error-bg);
+    }
+
+    .gc-field textarea {
+      resize: vertical;
+      min-height: 96px;
+      line-height: 1.65;
+    }
+
+    .gc-field input::placeholder,
+    .gc-field textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .gc-error-msg {
+      font-size: 11px;
+      color: var(--error);
+      margin-top: 5px;
+      display: none;
+      font-weight: 500;
+    }
+
+    .gc-error-msg.show { display: block; }
+
+    /* Row: 2-column on wider screens */
+    .gc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 420px) {
+      .gc-row { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       CUSTOM SELECT
+    ═══════════════════════════════════════════ */
+    .gc-select-wrap {
+      position: relative;
+    }
+
+    .gc-select-trigger {
+      width: 100%;
+      padding: 13px 40px 13px 15px;
+      font-size: 14px;
+      font-family: 'Pretendard', sans-serif;
+      color: var(--text-muted);
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      appearance: none;
+      position: relative;
+    }
+
+    .gc-select-trigger.has-value { color: var(--text); }
+    .gc-select-trigger.error { border-color: var(--error); background: var(--error-bg); }
+
+    .gc-select-trigger.open {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
+
+    .gc-select-arrow {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: var(--text-muted);
+      pointer-events: none;
+      transition: transform var(--transition);
+    }
+
+    .gc-select-trigger.open + .gc-select-arrow {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .gc-dropdown {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0; right: 0;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+      z-index: 50;
+      overflow: hidden;
+      display: none;
+      animation: dropIn 0.15s ease-out;
+    }
+
+    .gc-dropdown.open { display: block; }
+
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .gc-dropdown button {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 14px;
+      font-family: 'Pretendard', sans-serif;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    .gc-dropdown button:hover { background: var(--cream); }
+    .gc-dropdown button.active { background: var(--gold-glow); color: var(--navy); font-weight: 600; }
+
+    /* ═══════════════════════════════════════════
+       CONSENT CHECKBOX
+    ═══════════════════════════════════════════ */
+    .gc-consent {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-sub);
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 18px;
+    }
+
+    .gc-consent input { display: none; }
+
+    .gc-consent-box {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition);
+      background: var(--cream);
+    }
+
+    .gc-consent input:checked + .gc-consent-box {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .gc-consent-box svg {
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.15s ease;
+    }
+
+    .gc-consent input:checked + .gc-consent-box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .gc-consent .req {
+      color: var(--error);
+      margin-left: 2px;
+      font-weight: 700;
+    }
+
+    .gc-consent.error .gc-consent-box {
+      border-color: var(--error);
+    }
+
+    /* ═══════════════════════════════════════════
+       SUBMIT BUTTON
+    ═══════════════════════════════════════════ */
+    .gc-submit {
+      width: 100%;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Pretendard', sans-serif;
+      color: #fff;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+      border: 2px solid var(--gold);
+      border-radius: var(--radius);
+      cursor: pointer;
+      letter-spacing: 0.8px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gc-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(196,163,90,0.25);
+    }
+
+    .gc-submit:active {
+      transform: translateY(0);
+    }
+
+    .gc-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading spinner */
+    .gc-submit .spinner {
+      display: none;
+      width: 20px; height: 20px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+      margin: 0 auto;
+    }
+
+    .gc-submit.loading .spinner { display: block; }
+    .gc-submit.loading .btn-text { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ═══════════════════════════════════════════
+       GLOBAL ERROR BANNER
+    ═══════════════════════════════════════════ */
+    .gc-banner {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .gc-banner.show { display: block; }
+
+    .gc-banner.error-banner {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER NOTE
+    ═══════════════════════════════════════════ */
+    .gc-footer-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      padding: 0 24px 22px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SUCCESS STATE
+    ═══════════════════════════════════════════ */
+    .gc-success {
+      display: none;
+      text-align: center;
+      padding: 56px 32px;
+      animation: cardEnter 0.45s ease-out;
+    }
+
+    .gc-success.show { display: block; }
+    .gc-form-wrap.hide { display: none; }
+
+    .gc-success-icon {
+      margin-bottom: 22px;
+    }
+
+    .gc-success h3 {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .gc-success p {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .gc-success-reset {
+      padding: 11px 32px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Pretendard', sans-serif;
+      color: var(--navy);
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .gc-success-reset:hover {
+      background: var(--gold-glow);
+    }
+
+    /* ═══════════════════════════════════════════
+       RATE LIMIT NOTICE (honeypot hidden)
+    ═══════════════════════════════════════════ */
+    .gc-hp { position: absolute; left: -9999px; opacity: 0; height: 0; }
+  </style>
+</head>
+<body>
+
+<section id="glory-consult">
+  <div class="gc-accent"></div>
+
+  <!-- ══ HEADER ══ -->
+  <div class="gc-header">
+    <div class="gc-badge">Legal Consultation</div>
+    <h2>법무법인 글로리<span>상담신청</span></h2>
+    <p>별도의 상담비용 없이 친절상담으로<br>최적의 법률서비스를 제공합니다.</p>
+  </div>
+
+  <div class="gc-divider"><span class="gc-divider-icon">◆</span></div>
+
+  <!-- ══ FORM AREA ══ -->
+  <div class="gc-form-wrap">
+    <form id="consultForm" class="gc-form" novalidate>
+      <!-- Honeypot: 봇 방지 (숨겨진 필드) -->
+      <input type="text" name="website" class="gc-hp" tabindex="-1" autocomplete="off">
+
+      <div class="gc-row">
+        <!-- 이름 -->
+        <div class="gc-field">
+          <label>이름 <span class="req">*</span></label>
+          <input type="text" id="gc-name" placeholder="성함을 입력해주세요" maxlength="10" autocomplete="name">
+          <div class="gc-error-msg" id="err-name"></div>
+        </div>
+
+        <!-- 연락처 -->
+        <div class="gc-field">
+          <label>연락처 <span class="req">*</span></label>
+          <input type="tel" id="gc-phone" placeholder="010-0000-0000" maxlength="13" autocomplete="tel">
+          <div class="gc-error-msg" id="err-phone"></div>
+        </div>
+      </div>
+
+      <!-- 상담분야 -->
+      <div class="gc-field">
+        <label>상담분야 <span class="req">*</span></label>
+        <div class="gc-select-wrap" id="gc-select-wrap">
+          <button type="button" class="gc-select-trigger" id="gc-select-trigger">
+            상담 분야를 선택해주세요
+          </button>
+          <span class="gc-select-arrow">▾</span>
+          <div class="gc-dropdown" id="gc-dropdown">
+            <button type="button" data-value="성범죄">성범죄</button>
+            <button type="button" data-value="재산범죄">재산범죄</button>
+            <button type="button" data-value="교통범죄">교통범죄</button>
+            <button type="button" data-value="마약범죄">마약범죄</button>
+            <button type="button" data-value="보이스피싱">보이스피싱</button>
+            <button type="button" data-value="피해자">피해자</button>
+          </div>
+          <input type="hidden" id="gc-category" value="">
+        </div>
+        <div class="gc-error-msg" id="err-category"></div>
+      </div>
+
+      <!-- 상담내용 -->
+      <div class="gc-field">
+        <label>상담내용</label>
+        <textarea id="gc-message" placeholder="상담하고 싶은 내용을 남겨주세요." rows="4"></textarea>
+      </div>
+
+      <!-- 동의 -->
+      <label class="gc-consent" id="gc-consent-label">
+        <input type="checkbox" id="gc-consent" checked>
+        <span class="gc-consent-box">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 6L5 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        개인정보 수집·이용에 동의합니다.<span class="req">*</span>
+      </label>
+      <div class="gc-error-msg" id="err-consent" style="margin-top:-12px;margin-bottom:14px;"></div>
+
+      <!-- 제출 -->
+      <button type="submit" class="gc-submit" id="gc-submit">
+        <span class="btn-text">무료 상담 신청하기</span>
+        <span class="spinner"></span>
+      </button>
+
+      <div class="gc-banner error-banner" id="gc-global-error"></div>
+    </form>
+  </div>
+
+  <!-- ══ SUCCESS STATE ══ -->
+  <div class="gc-success" id="gc-success">
+    <div class="gc-success-icon">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="26" r="26" fill="#152C44"/>
+        <path d="M16 26.5L23 33.5L36 20.5" stroke="#C4A35A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h3>상담 신청이 완료되었습니다</h3>
+    <p>빠른 시일 내에 담당 변호사가<br>연락드리겠습니다.</p>
+    <button class="gc-success-reset" id="gc-reset">추가 상담 신청</button>
+  </div>
+
+  <p class="gc-footer-note">⏱ 접수 후 24시간 이내 담당 변호사 배정</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     Supabase JS SDK (CDN)
+═══════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+<script>
+(function() {
+  'use strict';
+
+  // ══════════════════════════════════════════════
+  // ★ 설정: 여기만 수정하세요
+  // ══════════════════════════════════════════════
+  const SUPABASE_URL  = 'https://tknyhvycsxvlxrdscmue.supabase.co';   // ← Supabase 프로젝트 URL
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrbnlodnljc3h2bHhyZHNjbXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NDQ2NjQsImV4cCI6MjA5NDIyMDY2NH0.WaeR94STn1lpm-hJQeCiJITE3Pvmien84EU9tIyVLDg';           // ← anon (public) 키
+
+  // ══════════════════════════════════════════════
+  // Supabase 클라이언트 생성
+  // ══════════════════════════════════════════════
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  // ══════════════════════════════════════════════
+  // DOM 요소
+  // ══════════════════════════════════════════════
+  const form          = document.getElementById('consultForm');
+  const nameInput     = document.getElementById('gc-name');
+  const phoneInput    = document.getElementById('gc-phone');
+  const categoryInput = document.getElementById('gc-category');
+  const messageInput  = document.getElementById('gc-message');
+  const consentInput  = document.getElementById('gc-consent');
+  const consentLabel  = document.getElementById('gc-consent-label');
+  const submitBtn     = document.getElementById('gc-submit');
+  const globalError   = document.getElementById('gc-global-error');
+  const formWrap      = document.querySelector('.gc-form-wrap');
+  const successEl     = document.getElementById('gc-success');
+  const resetBtn      = document.getElementById('gc-reset');
+  const honeypot      = form.querySelector('[name="website"]');
+
+  // Custom select
+  const selectTrigger = document.getElementById('gc-select-trigger');
+  const dropdown      = document.getElementById('gc-dropdown');
+  const selectWrap    = document.getElementById('gc-select-wrap');
+
+  // ══════════════════════════════════════════════
+  // 스팸 방지: 레이트 리미팅
+  // ══════════════════════════════════════════════
+  const RATE_LIMIT_KEY = 'gc_last_submit';
+  const RATE_LIMIT_MS  = 30000; // 30초
+
+  function isRateLimited() {
+    const last = localStorage.getItem(RATE_LIMIT_KEY);
+    if (!last) return false;
+    return (Date.now() - parseInt(last, 10)) < RATE_LIMIT_MS;
+  }
+
+  function markSubmitted() {
+    localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
+  }
+
+  // ══════════════════════════════════════════════
+  // 전화번호 포맷팅
+  // ══════════════════════════════════════════════
+  phoneInput.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length <= 3) {
+      this.value = v;
+    } else if (v.length <= 7) {
+      this.value = v.slice(0,3) + '-' + v.slice(3);
+    } else {
+      this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+    }
+    clearError('phone');
+  });
+
+  nameInput.addEventListener('input', () => clearError('name'));
+  consentInput.addEventListener('change', () => clearError('consent'));
+
+  // ══════════════════════════════════════════════
+  // 커스텀 셀렉트 드롭다운
+  // ══════════════════════════════════════════════
+  selectTrigger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('open');
+    selectTrigger.classList.toggle('open', isOpen);
+  });
+
+  dropdown.querySelectorAll('button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const val = this.dataset.value;
+      categoryInput.value = val;
+      selectTrigger.textContent = val;
+      selectTrigger.classList.add('has-value');
+      selectTrigger.classList.remove('error');
+      dropdown.classList.remove('open');
+      selectTrigger.classList.remove('open');
+      // Mark active
+      dropdown.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      clearError('category');
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!selectWrap.contains(e.target)) {
+      dropdown.classList.remove('open');
+      selectTrigger.classList.remove('open');
+    }
+  });
+
+  // ══════════════════════════════════════════════
+  // 유효성 검사
+  // ══════════════════════════════════════════════
+  function showError(field, msg) {
+    const el = document.getElementById('err-' + field);
+    el.textContent = msg;
+    el.classList.add('show');
+
+    if (field === 'name') nameInput.classList.add('error');
+    if (field === 'phone') phoneInput.classList.add('error');
+    if (field === 'category') selectTrigger.classList.add('error');
+    if (field === 'consent') consentLabel.classList.add('error');
+  }
+
+  function clearError(field) {
+    const el = document.getElementById('err-' + field);
+    if (el) { el.classList.remove('show'); el.textContent = ''; }
+
+    if (field === 'name') nameInput.classList.remove('error');
+    if (field === 'phone') phoneInput.classList.remove('error');
+    if (field === 'category') selectTrigger.classList.remove('error');
+    if (field === 'consent') consentLabel.classList.remove('error');
+  }
+
+  function clearAllErrors() {
+    ['name','phone','category','consent'].forEach(clearError);
+    globalError.classList.remove('show');
+    globalError.textContent = '';
+  }
+
+  function validate() {
+    clearAllErrors();
+    let valid = true;
+    const name  = nameInput.value.trim();
+    const phone = phoneInput.value.replace(/\D/g, '');
+    const cat   = categoryInput.value;
+
+    if (!name) {
+      showError('name', '이름을 입력해주세요.');
+      valid = false;
+    }
+
+    if (!phone || !/^01[016789]\d{7,8}$/.test(phone)) {
+      showError('phone', '올바른 연락처를 입력해주세요.');
+      valid = false;
+    }
+
+    if (!cat) {
+      showError('category', '상담 분야를 선택해주세요.');
+      valid = false;
+    }
+
+    if (!consentInput.checked) {
+      showError('consent', '개인정보 수집·이용에 동의해주세요.');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  // ══════════════════════════════════════════════
+  // XSS 방지: 입력값 새니타이징
+  // ══════════════════════════════════════════════
+  function sanitize(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  }
+
+  // ══════════════════════════════════════════════
+  // 폼 제출
+  // ══════════════════════════════════════════════
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // 봇 체크 (허니팟)
+    if (honeypot.value) return;
+
+    if (!validate()) return;
+
+    // 레이트 리미트
+    if (isRateLimited()) {
+      globalError.textContent = '잠시 후 다시 시도해주세요. (30초 제한)';
+      globalError.classList.add('show');
+      return;
+    }
+
+    // Loading 상태
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    try {
+      const payload = {
+        name:     sanitize(nameInput.value.trim()),
+        phone:    phoneInput.value.replace(/\D/g, ''),
+        category: categoryInput.value,
+        message:  sanitize(messageInput.value.trim()) || null,
+        source:   '본문 신청폼'
+      };
+
+      const { error } = await supabase
+        .from('consultations')
+        .insert([payload]);
+
+      if (error) throw error;
+
+      markSubmitted();
+
+      // 성공 화면 전환
+      formWrap.classList.add('hide');
+      successEl.classList.add('show');
+
+    } catch (err) {
+      console.error('Submit error:', err);
+      globalError.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      globalError.classList.add('show');
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+
+  // ══════════════════════════════════════════════
+  // 리셋 (추가 상담)
+  // ══════════════════════════════════════════════
+  resetBtn.addEventListener('click', function() {
+    nameInput.value = '';
+    phoneInput.value = '';
+    categoryInput.value = '';
+    messageInput.value = '';
+    consentInput.checked = true;
+    selectTrigger.textContent = '상담 분야를 선택해주세요';
+    selectTrigger.classList.remove('has-value');
+    dropdown.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    clearAllErrors();
+    successEl.classList.remove('show');
+    formWrap.classList.remove('hide');
+  });
+
+})();
+</script>
+
+</body>
+</html>
