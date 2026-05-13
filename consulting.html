@@ -241,28 +241,26 @@
     <h2>법무법인 글로리<br><span>상담신청</span></h2>
     <p>별도의 상담비용 없이 친절상담으로<br>최적의 법률서비스를 제공합니다.</p>
   </div>
+ 
   <div class="gc-stepbar">
     <div class="gc-progress"><div class="gc-progress-fill"></div></div>
   </div>
  
-  <!-- ★ onsubmit 에서 dll() 제거, return false로 기본 제출 차단 -->
-  <form id="form_e11" name="frm_phonecall_web" method="post" class="gc-form" novalidate
-        onsubmit="return false;">
- 
+  <!-- 
+    변경사항:
+    1. onsubmit 제거 → JS에서 전부 제어
+    2. action 비워둠 → JS에서 동적 설정
+    3. target 비워둠 → JS에서 동적 설정
+  -->
+  <form id="form_e11" name="frm_phonecall_web" action="" method="post" class="gc-form" novalidate>
     <input type="hidden" name="entry.1918755835" value="본문 신청폼">
  
     <div class="gc-row">
-      <label>
-        <span>이름<span class="req">*</span></span>
-        <input type="text" id="name" name="entry.569078713"
-               placeholder="성함을 입력해주세요." maxlength="4"
-               autocomplete="name" inputmode="text">
+      <label><span>이름<span class="req">*</span></span>
+        <input type="text" id="name" name="entry.569078713" placeholder="성함을 입력해주세요." maxlength="4">
       </label>
-      <label>
-        <span>연락처<span class="req">*</span></span>
-        <input type="tel" id="phone" name="entry.845785171"
-               placeholder="연락처를 입력해주세요." maxlength="11"
-               autocomplete="tel" inputmode="numeric" pattern="[0-9]*" required>
+      <label><span>연락처<span class="req">*</span></span>
+        <input type="text" id="phone" name="entry.845785171" placeholder="연락처를 입력해주세요." maxlength="11" required>
       </label>
     </div>
  
@@ -271,7 +269,7 @@
         <span>상담분야<span class="req">*</span></span>
         <div class="custom-select-wrap">
           <select name="entry.1553321640" id="intro_select" class="custom-select">
-            <option value="" selected disabled>상담 분야</option>
+            <option selected disabled value="">상담 분야</option>
             <option value="성범죄">성범죄</option>
             <option value="재산범죄">재산범죄</option>
             <option value="교통범죄">교통범죄</option>
@@ -284,21 +282,22 @@
     </div>
  
     <div class="gc-row gc-full">
-      <label>
-        <span>상담내용</span>
-        <textarea name="entry.160911452" id="message"
-                  placeholder="상담하고 싶은 내용을 남겨주세요."></textarea>
+      <label><span>상담내용</span>
+        <textarea name="entry.160911452" id="message" placeholder="상담하고 싶은 내용을 남겨주세요."></textarea>
       </label>
     </div>
  
     <div class="gc-row gc-footer">
       <label class="gc-consent">
-        <input type="checkbox" name="agree_r1" id="agree11" checked style="appearance:auto;">
+        <input type="checkbox" name="agree_r1" id="agree11" checked style="appearance: auto;">
         개인정보 수집·이용에 동의합니다.<span class="req">*</span>
       </label>
       <input type="submit" id="send_message" class="gc-button" value="무료 상담 신청하기">
     </div>
   </form>
+ 
+  <!-- iframe: JS에서 동적 생성도 하지만, 미리 있으면 더 안정적 -->
+  <iframe name="hidden_iframe11" style="display:none;"></iframe>
 </section>
  
 <!-- iframe은 fetch 실패 시 fallback 용도로만 유지 -->
