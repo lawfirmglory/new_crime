@@ -223,114 +223,121 @@
 
 	<script src="./js/jquery-1.8.3.min.js"></script>
 
+
 <section id="floating-menu">
+
+<!-- ===== PC ===== -->
 <div class="bottom_contact pc_img">
-    <div class="inner clfix">
-        <div class="title">
-          <a > 
-<span class="tit">글로리 법무법인 형사센터</span></a>
-            <span class="tel"><a>무료 상담신청</a><img src="./img/click_icon.png" alt="" class="click_img"></span>
-        </div><!-- // title -->
-        <div class="input_wrap">
-            <form id="form_e12" name="frm_phonecall_web" action="" method="post" target="hidden_iframe12" onsubmit="dll2(); submitted2=true;">
-                <input type="hidden" name="entry.1918755835"  value="pc 플로팅 메뉴 신청">
-
-                <ul class="clfix">
-                    <li>
-                        <span>성명</span>
-                        <input type="text" id="pc_name" name="entry.569078713" >
-                    </li>
-                    <li>
-                        <span>연락처</span>
-                        <input type="text"  id="pc_phone" name="entry.845785171" maxlength="11">
-                    </li>
-                    <li>
-        <select name="entry.1553321640" id="pc_select" class="select2">
-                                <option selected disabled>상담 분야</option>
-                                <option value="성범죄">성범죄</option>
-                                <option value="재산범죄">재산범죄</option>
-                                <option value="교통범죄">교통범죄</option>
-                                <option value="마약범죄">마약범죄</option>
-                                <option value="보이스피싱">보이스피싱</option>
-                                <option value="피해자">피해자</option>
-                                                                
-            
-        </select>
-                    </li>
-                </ul><!-- // clfix -->
-    <div class="b_check check_bar">
-      <input type="checkbox" checked name="policy_agree" value="1" id="agree12" style="display:inline;appearance: auto;margin-left: 40px;">
-      <span style="color:#fff;">개인정보 수집 및 이용 동의</span> <span id="pc_alert" style="margin-left:40px;color:#fff;font-size:13px;"></span>
+  <div class="inner clfix">
+    <div class="title">
+      <a>
+        <span class="tit">글로리 법무법인 형사센터</span>
+      </a>
+      <span class="tel">
+        <a>무료 상담신청</a>
+        <img src="./img/click_icon.png" alt="" class="click_img">
+      </span>
     </div>
-           
-        </div><!-- // input_wrap -->
-        <div class="go_btn">
-            <button id="pc_btn" disabled>상담 신청</button>
+
+    <div class="input_wrap">
+      <form id="form_e12" method="post">
+        <input type="hidden" name="entry.1918755835" value="pc 플로팅 메뉴 신청">
+        <ul class="clfix">
+          <li>
+            <span>성명</span>
+            <input type="text" id="pc_name" name="entry.569078713">
+          </li>
+          <li>
+            <span>연락처</span>
+            <input type="text" id="pc_phone" name="entry.845785171" maxlength="11">
+          </li>
+          <li>
+            <select name="entry.1553321640" id="pc_select" class="select2">
+              <option selected disabled>상담 분야</option>
+              <option value="성범죄">성범죄</option>
+              <option value="재산범죄">재산범죄</option>
+              <option value="교통범죄">교통범죄</option>
+              <option value="마약범죄">마약범죄</option>
+              <option value="보이스피싱">보이스피싱</option>
+              <option value="피해자">피해자</option>
+            </select>
+          </li>
+        </ul>
+        <div class="b_check check_bar">
+          <input type="checkbox" checked name="policy_agree" value="1" id="agree12"
+                 style="display:inline; appearance:auto; margin-left:40px;">
+          <span style="color:#fff;">개인정보 수집 및 이용 동의</span>
+          <span id="pc_alert" style="margin-left:40px; color:#fff; font-size:13px;"></span>
         </div>
-    </div><!-- // inner -->
-</div><!-- // bottom_contact -->
-</form>
-
-<div class="bottom_contact_mob mob_img">
-    <div class="top_thumb">
-<div class="title">
-  <a ></a>
-  <a  style="display:contents;width:100%;max-width:300px;"> <img src="./img/click_icon.png" alt="" class="click_img">
-  <span class="tit">24시간 비밀 상담</span>
-  <span class="tel">1분 무료 상담 신청</span></a>
-</div><!-- // title -->
-<div class="btn">
-  <a href="javascript:void(0)" style="font-size:0.9rem;border-radius:10px;">즉시 상담신청</a>
-</div><!-- // btn -->
-    </div><!-- // top_thumb -->
-    <div class="bottom_con" >
-        <div class="inner">
-            <form name="frm_phonecall_mob" id="form_e13" method="post" target="hidden_iframe13" onsubmit="dll3(); submitted3=true;">
-              <input type="hidden" name="entry.1918755835"  value="mobile 신청">
-                <ul class="in_wrap clfix">
-                    <li>
-                        <span>성명</span>
-                        <input type="text" class="r_input" name="entry.569078713"  id="mob_name">
-                    </li>
-                    <li>
-                        <span>연락처</span>
-                        <input type="text" class="r_input wr_tel" name="entry.845785171" maxlength="11" id="mob_phone">
-                    </li>
-                    <li>
-        <select name="entry.1553321640" id="mob_select" class="select3">
-                                        <option selected disabled>상담 분야</option>
-                                        <option value="성범죄">성범죄</option>
-                                        <option value="재산범죄">재산범죄</option>
-                                        <option value="교통범죄">교통범죄</option>
-                                        <option value="마약범죄">마약범죄</option>
-                                        <option value="보이스피싱">보이스피싱</option>
-                                        <option value="피해자">피해자</option>
-                                                                        
-                                                               
-        
-        </select>
-                    </li>
-                </ul><!-- // clfix -->
-    <div class="b_check">
-      <input type="checkbox" checked name="policy_agree" value="1" id="agree13" style="display: inline;">
-      <span>개인정보 수집 및 이용 동의</span> 
+      </form>
     </div>
-                <div class="m_go_btn">
-                    <button  id="mob_btn" style="color:#fff;width:100%;font-size:1em;padding: 15px 10px;
-    border-radius: 10px;background:#ac9173" disabled>상담신청</button>
-                </div>
-            </form>
-            <script type="text/javascript">var submitted = false;</script>
-            <iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;" onload=""></iframe>
-            <script type="text/javascript">var submitted2 = false;</script>
-            <iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;" onload=""></iframe>
 
-            
-<script type="text/javascript">var submitted3 = false;</script>
-<iframe name="hidden_iframe13" id="hidden_iframe13" style="display:none;" onload=""></iframe>
-        </div><!-- // inner -->
-    </div><!-- // bottom_con -->
-</div><!-- // bottom_contact_mob -->
+    <div class="go_btn">
+      <button type="button" id="pc_btn" disabled>상담 신청</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 모바일 ===== -->
+<div class="bottom_contact_mob mob_img">
+  <div class="top_thumb">
+    <div class="title">
+      <a></a>
+      <a style="display:contents; width:100%; max-width:300px;">
+        <img src="./img/click_icon.png" alt="" class="click_img">
+        <span class="tit">24시간 비밀 상담</span>
+        <span class="tel">1분 무료 상담 신청</span>
+      </a>
+    </div>
+    <div class="btn">
+      <a href="javascript:void(0)" style="font-size:0.9rem; border-radius:10px;">즉시 상담신청</a>
+    </div>
+  </div>
+
+  <div class="bottom_con">
+    <div class="inner">
+      <form id="form_e13" method="post">
+        <input type="hidden" name="entry.1918755835" value="mobile 신청">
+        <ul class="in_wrap clfix">
+          <li>
+            <span>성명</span>
+            <input type="text" class="r_input" name="entry.569078713" id="mob_name">
+          </li>
+          <li>
+            <span>연락처</span>
+            <input type="text" class="r_input wr_tel" name="entry.845785171" maxlength="11" id="mob_phone">
+          </li>
+          <li>
+            <select name="entry.1553321640" id="mob_select" class="select3">
+              <option selected disabled>상담 분야</option>
+              <option value="성범죄">성범죄</option>
+              <option value="재산범죄">재산범죄</option>
+              <option value="교통범죄">교통범죄</option>
+              <option value="마약범죄">마약범죄</option>
+              <option value="보이스피싱">보이스피싱</option>
+              <option value="피해자">피해자</option>
+            </select>
+          </li>
+        </ul>
+        <div class="b_check">
+          <input type="checkbox" checked name="policy_agree" value="1" id="agree13" style="display:inline;">
+          <span>개인정보 수집 및 이용 동의</span>
+        </div>
+        <div class="m_go_btn">
+          <button type="button" id="mob_btn"
+                  style="color:#fff; width:100%; font-size:1em; padding:15px 10px;
+                         border-radius:10px; background:#ac9173;"
+                  disabled>상담신청</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery 로드 이후에 배치 -->
+<script src="./js/floating_form.js"></script>
+
 </section>
 
 
@@ -507,7 +514,7 @@
 <!-- <script src="./js/validation.js"></script> -->
 
 <script src="./js/validation-float-pc.js"></script>
-<script src="./js/validation-float-mob.js"></script>
+<!-- <script src="./js/validation-float-mob.js"></script> -->
 
 <script src="./js/footer.js" defer></script>
 </html>
