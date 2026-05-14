@@ -1,17 +1,20 @@
 /**
- * Google Forms 제출 스크립트 (GitHub Pages 완벽 호환)
+ * Supabase 상담 신청 스크립트
  * 
- * 전략: fetch (no-cors) → iframe fallback → 타임아웃 안전장치
- * - fetch: 대부분의 modern 브라우저에서 확실하게 전송
- * - iframe: fetch 실패 시 fallback
- * - 타임아웃: 어떤 경우든 일정 시간 후 완료 처리
+ * 기존 Google Forms 스크립트의 유효성 검사 로직을 그대로 유지하면서
+ * Supabase DB로 전송합니다.
+ * 
+ * ★ 설정: 아래 두 줄만 본인 값으로 변경하세요
  */
 
 (function () {
   'use strict';
 
-  var GOOGLE_FORM_URL =
-    'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfIiP9BhHVQCcHQTJvxE9QQ2lKlRGyHinsk7st5gDbROFL8sQ/formResponse';
+  // ══════════════════════════════════════════════
+  // ★ Supabase 설정
+  // ══════════════════════════════════════════════
+  var SUPABASE_URL  = 'https://tknyhvycsxvlxrdscmue.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrbnlodnljc3h2bHhyZHNjbXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NDQ2NjQsImV4cCI6MjA5NDIyMDY2NH0.WaeR94STn1lpm-hJQeCiJITE3Pvmien84EU9tIyVLDg';
 
   var isSubmitting = false;
 
@@ -28,7 +31,7 @@
 
         isSubmitting = true;
         showSubmitting();
-        submitToGoogle();
+        submitToSupabase();
         return false;
       });
 
@@ -41,97 +44,55 @@
   });
 
   // ================================================================
-  //  핵심: 이중 전송 (fetch + iframe) + 타임아웃 안전장치
+  //  Supabase 전송
   // ================================================================
-  function submitToGoogle() {
-    var formEl = document.getElementById('form_e11');
-    if (!formEl) {
-      alert('신청 폼을 찾을 수 없습니다.');
-      resetSubmit();
-      return;
-    }
+  function submitToSupabase() {
+    var name     = $.trim($('#name').val() || '');
+    var phone    = String($('#phone').val() || '').replace(/[^0-9]/g, '');
+    var category = $('#intro_select').val();
+    var message  = $.trim($('#message').val() || '');
 
-    var formData = new FormData(formEl);
-    var completed = false;
+    var payload = {
+      name:     name,
+      phone:    phone,
+      category: category,
+      message:  message || null,
+      source:   '본문 신청폼'
+    };
 
-    function onSuccess() {
-      if (completed) return;
-      completed = true;
+    fetch(SUPABASE_URL + '/rest/v1/consultations', {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        SUPABASE_ANON,
+        'Authorization': 'Bearer ' + SUPABASE_ANON,
+        'Prefer':        'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error('저장 실패');
       trackPixel();
       alert('상담 신청이 완료되었습니다.');
       window.location.href = './thanks.html';
-    }
-
-    // ── 안전장치: 3초 후 무조건 성공 처리 ──
-    // Google Forms는 no-cors 모드에서 응답을 읽을 수 없으므로
-    // 전송 자체는 성공해도 콜백을 못 받을 수 있다.
-    // fetch/iframe 둘 다 발사한 뒤 3초면 충분히 도착한다.
-    var safetyTimer = setTimeout(onSuccess, 3000);
-
-    // ── 방법 1: fetch (no-cors) ──
-    if (typeof fetch === 'function') {
-      fetch(GOOGLE_FORM_URL, {
-        method: 'POST',
-        mode: 'no-cors', // opaque 응답이지만 전송은 된다
-        body: formData
-      })
-        .then(function () {
-          // opaque 응답 → status 0 이지만 전송 완료
-          onSuccess();
-        })
-        .catch(function () {
-          // fetch 실패 → iframe이 처리할 것이므로 무시
-        });
-    }
-
-    // ── 방법 2: iframe fallback (동시 발사) ──
-    submitViaIframe(formEl, formData, onSuccess);
+    })
+    .catch(function (err) {
+      alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      resetSubmit();
+    });
   }
 
   // ================================================================
-  //  iframe 방식 (fetch가 없는 구형 브라우저 대응)
-  // ================================================================
-  function submitViaIframe(formEl, formData, onSuccess) {
-    var iframeName = 'hidden_iframe11';
-    var iframe = document.querySelector('iframe[name="' + iframeName + '"]');
-
-    // iframe이 없으면 동적 생성
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.name = iframeName;
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-    }
-
-    // iframe load 이벤트 (cross-origin이라 불안정하지만 보조 수단)
-    $(iframe)
-      .off('load')
-      .on('load', function () {
-        onSuccess();
-      });
-
-    // form 속성 설정 후 submit
-    formEl.setAttribute('action', GOOGLE_FORM_URL);
-    formEl.setAttribute('method', 'POST');
-    formEl.setAttribute('target', iframeName);
-
-    // 약간의 지연 후 submit (DOM 반영 보장)
-    setTimeout(function () {
-      formEl.submit();
-    }, 50);
-  }
-
-  // ================================================================
-  //  유효성 검사
+  //  유효성 검사 (기존 로직 그대로)
   // ================================================================
   function form_c() {
-    var regexName = /^[가-힣]+$/;
+    var regexName  = /^[가-힣]+$/;
     var regexPhone = /^[0-9]+$/;
 
-    var name = $.trim($('#name').val() || '');
-    var phone = String($('#phone').val() || '').replace(/[^0-9]/g, '');
+    var name     = $.trim($('#name').val() || '');
+    var phone    = String($('#phone').val() || '').replace(/[^0-9]/g, '');
     var position = $('#intro_select').val();
-    var agree = $('#agree11').is(':checked');
+    var agree    = $('#agree11').is(':checked');
 
     $('#phone').val(phone);
 
@@ -157,7 +118,7 @@
   }
 
   // ================================================================
-  //  UI 헬퍼
+  //  UI 헬퍼 (기존 로직 그대로)
   // ================================================================
   function showSubmitting() {
     $('#send_message')

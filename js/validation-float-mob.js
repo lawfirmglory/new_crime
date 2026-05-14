@@ -1,3 +1,15 @@
+/**
+ * 모바일 상담 신청 스크립트 (Supabase 전송)
+ *
+ * 기존 Google Forms 전송 → Supabase REST API로 변경
+ * 유효성 검사, UI, 트래킹 등 모두 그대로 유지
+ *
+ * ★ 설정: 아래 두 줄만 본인 값으로 변경하세요
+ */
+
+var SUPABASE_URL  = 'https://tknyhvycsxvlxrdscmue.supabase.co';
+var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrbnlodnljc3h2bHhyZHNjbXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NDQ2NjQsImV4cCI6MjA5NDIyMDY2NH0.WaeR94STn1lpm-hJQeCiJITE3Pvmien84EU9tIyVLDg';
+
 var mobIsSubmitting = false;
 var mobSubmitStarted = false;
 
@@ -16,21 +28,8 @@ $(document).ready(function () {
       return false;
     }
 
-    var form = document.getElementById('form_e13');
-
-    if (!form) {
-      alert('신청 폼을 찾을 수 없습니다.');
-      return false;
-    }
-
     mobIsSubmitting = true;
     mobSubmitStarted = true;
-
-    $('#form_e13').attr({
-      action: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfIiP9BhHVQCcHQTJvxE9QQ2lKlRGyHinsk7st5gDbROFL8sQ/formResponse',
-      method: 'POST',
-      target: 'hidden_iframe13'
-    });
 
     $('#mob_btn')
       .prop('disabled', true)
@@ -47,28 +46,7 @@ $(document).ready(function () {
       cursor: 'default'
     });
 
-    $('#hidden_iframe13').off('load').on('load', function () {
-
-      if (!mobSubmitStarted) return;
-
-      mobSubmitStarted = false;
-
-      try {
-        if (window.karrotPixel && window.karrotPixel.track) {
-          window.karrotPixel.track('SubmitApplication');
-        }
-      } catch (e) {}
-
-      $('#mob_btn').text('신청이 완료되었습니다.');
-
-      alert('상담 신청이 완료되었습니다.');
-
-      window.location.href = './thanks.html';
-    });
-
-    setTimeout(function () {
-      form.submit();
-    }, 200);
+    submitMobToSupabase();
 
     return false;
   });
@@ -87,36 +65,60 @@ $(document).ready(function () {
 
 });
 
-function dll3() {
+// ================================================================
+//  Supabase 전송
+// ================================================================
+function submitMobToSupabase() {
+  var name     = $.trim($('#mob_name').val() || '');
+  var phone    = String($('#mob_phone').val() || '').replace(/[^0-9]/g, '');
+  var category = $('#mob_select').val();
 
-  try {
-    if (window.karrotPixel && window.karrotPixel.track) {
-      window.karrotPixel.track('SubmitApplication');
-    }
-  } catch (e) {}
+  var payload = {
+    name:     name,
+    phone:    phone,
+    category: category,
+    message:  null,
+    source:   '모바일 신청폼'
+  };
 
-  alert('무료 상담 신청이 완료되었습니다.');
+  fetch(SUPABASE_URL + '/rest/v1/consultations', {
+    method: 'POST',
+    headers: {
+      'Content-Type':  'application/json',
+      'apikey':        SUPABASE_ANON,
+      'Authorization': 'Bearer ' + SUPABASE_ANON,
+      'Prefer':        'return=minimal'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(function (res) {
+    if (!res.ok) throw new Error('저장 실패');
 
-  $('.m_go_btn, #mob_btn').prop('disabled', true);
+    mobSubmitStarted = false;
+
+    try {
+      if (window.karrotPixel && window.karrotPixel.track) {
+        window.karrotPixel.track('SubmitApplication');
+      }
+    } catch (e) {}
+
+    $('#mob_btn').text('신청이 완료되었습니다.');
+
+    alert('상담 신청이 완료되었습니다.');
+
+    window.location.href = './thanks.html';
+  })
+  .catch(function (err) {
+    alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    mobIsSubmitting = false;
+    mobSubmitStarted = false;
+    form_check2();
+  });
 }
 
-function maxLengthCheck(object) {
-  if (object.value.length > object.maxLength) {
-    object.value = object.value.slice(0, object.maxLength);
-  }
-}
-
-function hoa() {
-
-  alert('상담 신청이 완료되었습니다.');
-
-  window.location.href = './thanks.html';
-}
-
-function site1111() {
-  window.location.reload();
-}
-
+// ================================================================
+//  유효성 검사 (기존 로직 그대로)
+// ================================================================
 function form_check2() {
 
   const regexName = /^[가-힣a-zA-Z\s]+$/;
@@ -172,6 +174,9 @@ function form_check2() {
   return true;
 }
 
+// ================================================================
+//  UI 헬퍼 (기존 로직 그대로)
+// ================================================================
 function mobButtonValid() {
 
   $('#mob_btn')
@@ -206,4 +211,34 @@ function mobButtonInvalid(text) {
     background: '#000',
     cursor: 'default'
   });
+}
+
+function dll3() {
+
+  try {
+    if (window.karrotPixel && window.karrotPixel.track) {
+      window.karrotPixel.track('SubmitApplication');
+    }
+  } catch (e) {}
+
+  alert('무료 상담 신청이 완료되었습니다.');
+
+  $('.m_go_btn, #mob_btn').prop('disabled', true);
+}
+
+function maxLengthCheck(object) {
+  if (object.value.length > object.maxLength) {
+    object.value = object.value.slice(0, object.maxLength);
+  }
+}
+
+function hoa() {
+
+  alert('상담 신청이 완료되었습니다.');
+
+  window.location.href = './thanks.html';
+}
+
+function site1111() {
+  window.location.reload();
 }

@@ -1,3 +1,15 @@
+/**
+ * PC 상담 신청 스크립트 (Supabase 전송)
+ * 
+ * 기존 Google Forms 전송 → Supabase REST API로 변경
+ * 유효성 검사, UI, 트래킹, togglePhonesStart 등 모두 그대로 유지
+ *
+ * ★ 설정: 아래 두 줄만 본인 값으로 변경하세요
+ */
+
+var SUPABASE_URL  = 'https://tknyhvycsxvlxrdscmue.supabase.co';
+var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrbnlodnljc3h2bHhyZHNjbXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NDQ2NjQsImV4cCI6MjA5NDIyMDY2NH0.WaeR94STn1lpm-hJQeCiJITE3Pvmien84EU9tIyVLDg';
+
 var pcIsSubmitting = false;
 var pcSubmitStarted = false;
 
@@ -12,21 +24,8 @@ $(document).ready(function () {
     var isValid = form_check1();
     if (!isValid) return false;
 
-    var form = document.getElementById('form_e12');
-
-    if (!form) {
-      alert('신청 폼을 찾을 수 없습니다.');
-      return false;
-    }
-
     pcIsSubmitting = true;
     pcSubmitStarted = true;
-
-    $('#form_e12').attr({
-      action: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfIiP9BhHVQCcHQTJvxE9QQ2lKlRGyHinsk7st5gDbROFL8sQ/formResponse',
-      method: 'POST',
-      target: 'hidden_iframe12'
-    });
 
     $('#pc_btn')
       .prop('disabled', true)
@@ -40,27 +39,7 @@ $(document).ready(function () {
 
     $('#pc_alert').text('신청 정보를 전송하고 있습니다. 잠시만 기다려주세요.');
 
-    $('#hidden_iframe12').off('load').on('load', function () {
-      if (!pcSubmitStarted) return;
-
-      pcSubmitStarted = false;
-
-      try {
-        if (window.karrotPixel && window.karrotPixel.track) {
-          window.karrotPixel.track('SubmitApplication');
-        }
-      } catch (err) {}
-
-      $('#pc_btn').text('신청완료');
-      $('#pc_alert').text('신청이 완료되었습니다.');
-
-      alert('상담 신청이 완료되었습니다.');
-      window.location.href = './thanks.html';
-    });
-
-    setTimeout(function () {
-      form.submit();
-    }, 150);
+    submitPcToSupabase();
 
     return false;
   });
@@ -80,6 +59,60 @@ $(document).ready(function () {
   togglePhonesStart();
 });
 
+// ================================================================
+//  Supabase 전송
+// ================================================================
+function submitPcToSupabase() {
+  var name     = $.trim($('#pc_name').val() || '');
+  var phone    = String($('#pc_phone').val() || '').replace(/[^0-9]/g, '');
+  var category = $('#pc_select').val();
+
+  var payload = {
+    name:     name,
+    phone:    phone,
+    category: category,
+    message:  null,
+    source:   'PC 신청폼'
+  };
+
+  fetch(SUPABASE_URL + '/rest/v1/consultations', {
+    method: 'POST',
+    headers: {
+      'Content-Type':  'application/json',
+      'apikey':        SUPABASE_ANON,
+      'Authorization': 'Bearer ' + SUPABASE_ANON,
+      'Prefer':        'return=minimal'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(function (res) {
+    if (!res.ok) throw new Error('저장 실패');
+
+    pcSubmitStarted = false;
+
+    try {
+      if (window.karrotPixel && window.karrotPixel.track) {
+        window.karrotPixel.track('SubmitApplication');
+      }
+    } catch (err) {}
+
+    $('#pc_btn').text('신청완료');
+    $('#pc_alert').text('신청이 완료되었습니다.');
+
+    alert('상담 신청이 완료되었습니다.');
+    window.location.href = './thanks.html';
+  })
+  .catch(function (err) {
+    alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    pcIsSubmitting = false;
+    pcSubmitStarted = false;
+    form_check1();
+  });
+}
+
+// ================================================================
+//  유효성 검사 (기존 로직 그대로)
+// ================================================================
 function form_check1() {
   var regexName = /^[가-힣a-zA-Z\s]+$/;
   var regexPhone = /^[0-9]+$/;
@@ -121,6 +154,9 @@ function form_check1() {
   return true;
 }
 
+// ================================================================
+//  UI 헬퍼 (기존 로직 그대로)
+// ================================================================
 function pcButtonValid() {
   $('#pc_btn')
     .prop('disabled', false)
